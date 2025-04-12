@@ -1,0 +1,218 @@
+<html>
+    <head><title>Universe Rebirth</title></head>
+    <link rel="stylesheet" href="styles.css">
+    <body class="body" style="font-family: 'Courier New', Courier, monospace; background-color: rgb(0, 39, 39);">
+        <div id="newsticker" class="newsticker" style="overflow-x: hidden;"><div onclick="newstickerEvent()" id="tickerMessage" style="position: relative; width: max-content;"></div></div>
+        <div class="popupBg" id="popupBg">
+            <div class="popup" id="popup">
+                <div class="popupTitle"><font id="popupTitle">Uh oh!</font></div> <br>
+                <font id="popupInfo">you are not supposed to be here.</font> <br>
+                <font id="popupInfo2">you are not supposed to be here.</font> <br>
+                <div onclick="closePopup()" class="closePopup effect" id="popupClose">run.run.run.run.run.</div>
+            </div>
+        </div>
+        <div id="achGotDiv" class="achGotDiv"></div>
+        <div class="game" id="theGame">
+            <div class="menus">
+                <div id="menus1" style="width: 100%; height: 80%;">
+                    <button onclick="changeMenu(1)" class="menu1 effect"><img style="height: 100%;" src="images/atom.png"> <font style="bottom: 25%; position: relative;">Atoms</font></button>
+                    <button id="menu5" onclick="changeMenu(5)" class="menu5 effect"><img style="height: 100%;" src="images/collapse.png"> <font style="bottom: 25%; position: relative;">Collapse</font></button>
+                    <button onclick="changeMenu(2)" class="menu2 effect"><img style="height: 100%;" src="images/achievements.png"> <font style="bottom: 25%; position: relative;">Achievements</font></button>
+                    <button onclick="changeMenu(3)" class="menu3 effect"><img style="height: 100%;" src="images/stats.png"> <font style="bottom: 25%; position: relative;">Stats</font></button>
+                    <button onclick="changeMenu(4)" class="menu4 effect"><img style="height: 100%;" src="images/settings.png"> <font style="bottom: 25%; position: relative;">Settings</font></button>
+                </div>
+                <div id="menus2" style="width: 100%; height: 20%;">
+                    <button onclick="changeSubMenu(1)" class="menu1-1 effect" id="subMenu1.1"><font style="bottom: 25%; position: relative;" id="subMenu1"></font></button>
+                    <button onclick="changeSubMenu(2)" class="menu1-1 effect" id="subMenu2.1"><font style="bottom: 25%; position: relative;" id="subMenu2"></font></button>
+                    <button onclick="changeSubMenu(3)" class="menu1-1 effect" id="subMenu3.1"><font style="bottom: 25%; position: relative;" id="subMenu3"></font></button>
+                </div>
+            </div>
+            <div id="atoms_menu" class="content_menu">
+                <div id="atoms" style="color: white;"><font class="smalltext" id="atoms1"></font><font class="bigtext" id="atoms2"></font><font class="smalltext" id="atoms3"></font></div>
+                <div id="atoms_s" style="color: white;"><font class="smalltext" id="atoms_s1"></font><font class="bigtext" id="atoms_s2"></font><font class="smalltext" id="atoms_s3"></font></div> <br>
+                <div id="collapse_info" style="color: rgb(213, 0, 228); font-weight: bold;"><font class="smalltext" id="collapse_info1"></font><font class="bigtext" id="collapse_info2"></font><font class="smalltext" id="collapse_info3"></font></div> <br>
+                <div id="energy" style="color: yellow;"><font class="smalltext" id="energy1"></font><font class="bigtext" id="energy2"></font><font class="smalltext" id="energy3"></font><font class="bigtext" id="energy4"></font><font class="smalltext" id="energy5"></font></div>
+                <div id="energy_eff" style="color: yellow;"><font class="smalltext" id="energy_eff1"></font><font class="bigtext" id="energy_eff2"></font><font class="smalltext" id="energy_eff3"></font><font class="bigtext" id="energy_eff4"></font><font class="smalltext" id="energy_eff5"></font></div> <br>
+                <div class="dimension-stuff">
+                    <div class="dimensions">
+                        <div id="sacrifice-stuff" class="sacrifice-stuff">
+                            <button onclick="buySacrifice()" id="buySacrifice" class="sacrifice effect" style="font-family: 'Courier New', Courier, monospace;"><font id="sacrifice1" style="color: white;"></font></button>
+                        </div> <br>
+                        <div id="buy10-sacrifice_eff" style="color: white; display: inline-block;"><font class="smalltext" id="buy10-sacrifice"></font></div> <button onclick="change_buy_mode()" class="ED_buyStuff effect" id="ED_buy_mode"></button> <button onclick="ED_buy_all()" class="ED_buyStuff2 effect" id="ED_buy_mode2">Buy all</button>
+                        <div id="dim1" class="dimensionBg" style="margin-top: 2vh;"><font id="energy_dim1" style="color: rgb(255, 255, 117);"></font><font id="energy_dim1.1" style="color: rgb(255, 255, 117); margin-left: 13%; font-weight: bold;"></font><button onclick="buyDim(1)" class="buyDim effect" id="buyDim1"><font id="buyDimCost1" style="color: white;"></font></button></div>
+                        <div id="dim2" class="dimensionNoBg"><font id="energy_dim2" style="color: rgb(255, 255, 117);"></font><font id="energy_dim2.1" style="color: rgb(255, 255, 117); margin-left: 13%; font-weight: bold;"></font><button onclick="buyDim(2)" class="buyDim effect" id="buyDim2"><font id="buyDimCost2" style="color: white;"></font></button></div>
+                        <div id="dim3" class="dimensionBg"><font id="energy_dim3" style="color: rgb(255, 255, 117);"></font><font id="energy_dim3.1" style="color: rgb(255, 255, 117); margin-left: 13%; font-weight: bold;"></font><button onclick="buyDim(3)" class="buyDim effect" id="buyDim3"><font id="buyDimCost3" style="color: white;"></font></button></div>
+                        <div id="dim4" class="dimensionNoBg"><font id="energy_dim4" style="color: rgb(255, 255, 117);"></font><font id="energy_dim4.1" style="color: rgb(255, 255, 117); margin-left: 13%; font-weight: bold;"></font><button onclick="buyDim(4)" class="buyDim effect" id="buyDim4"><font id="buyDimCost4" style="color: white;"></font></button></div>
+                        <div id="dim5" class="dimensionBg"><font id="energy_dim5" style="color: rgb(255, 255, 117);"></font><font id="energy_dim5.1" style="color: rgb(255, 255, 117); margin-left: 13%; font-weight: bold;"></font><button onclick="buyDim(5)" class="buyDim effect" id="buyDim5"><font id="buyDimCost5" style="color: white;"></font></button></div>
+                        <div id="dim6" class="dimensionNoBg"><font id="energy_dim6" style="color: rgb(255, 255, 117);"></font><font id="energy_dim6.1" style="color: rgb(255, 255, 117); margin-left: 13%; font-weight: bold;"></font><button onclick="buyDim(6)" class="buyDim effect" id="buyDim6"><font id="buyDimCost6" style="color: white;"></font></button></div>
+                        <div id="dim7" class="dimensionBg"><font id="energy_dim7" style="color: rgb(255, 255, 117);"></font><font id="energy_dim7.1" style="color: rgb(255, 255, 117); margin-left: 13%; font-weight: bold;"></font><button onclick="buyDim(7)" class="buyDim effect" id="buyDim7"><font id="buyDimCost7" style="color: white;"></font></button></div> <br>
+                        <div id="tickspeed-stuff" class="tickspeed-stuff">
+                            <font class="smalltext" id="tickspeed1" style="color: white;"></font> <br>
+                            <button onclick="buyTickspeed()" id="buyTickspeed" class="tickspeed effect" style="text-align: center;"><font style="color: white;" id="tickspeed2"></font></button> <br>
+                            <font class="smalltext" id="tickspeed3" style="color: white;"></font>
+                        </div>
+                    </div>
+                    <div class="dimensions2">
+                        <font id="dimExpanse1" style="color: cyan; font-weight: bold;"></font> <br>
+                        <button onclick="buyExpanse()" id="buyExpanse" class="dimexpanse effect"><font id="dimExpanse2" style="color: cyan;"></font> <br> <font id="dimExpanse3" style="color: cyan; font-weight: bold;"></font></button> <br>
+                        <font id="dimExpanse3.5" style="font-weight: bold; color: cyan; font-size: 1.4vw;">EXPANSE BONUSES:</font> <br>
+                        <font id="dimExpanse4" style="color: cyan;"></font> <br>
+                        <font id="dimExpanse5" style="color: cyan;"></font> <br>
+                        <font id="dimExpanse6" style="color: cyan;"></font> <br> <br>
+                        <font id="stars1" style="color: rgb(255, 255, 150); font-weight: bold;"></font> <br>
+                        <button id="buyStar" onclick="buyStar()" class="star effect"><font id="stars2" style="color: rgb(255, 255, 150);"></font> <br> <font id="stars3" style="color: rgb(255, 255, 150); font-weight: bold;"></font></button> <br>
+                    </div>
+                </div> <br>
+                <font id="progressBar" style="font-size: 1.15vw; font-weight: bold; color: white;"></font><br>
+                <div class="progressBar"><div id="progressBar2" class="progressBar2"></div></div>
+            </div>
+
+            <div id="ach_menu" class="content_menu">
+                <font style="font-size: 3vw; font-weight: bold; color: white;">ACHIEVEMENTS</font> <br>
+                <font style="font-size: 1vw; color: white; opacity: 0.6;" id="ach_boost"></font> <br>
+                <div id="achDiv" class="achDiv">
+                    <div id="achImg1" class="achievement" order=0><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg2" class="achievement" order=1><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg3" class="achievement" order=2><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg4" class="achievement" order=3><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg5" class="achievement" order=4><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg6" class="achievement" order=5><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg7" class="achievement" order=6><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg8" class="achievement" order=7><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg9" class="achievement" order=8><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg10" class="achievement" order=9><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg11" class="achievement" order=10><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg12" class="achievement" order=11><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg13" class="achievement" order=12><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg14" class="achievement" order=13><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg15" class="achievement" order=14><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg16" class="achievement" order=15><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg17" class="achievement" order=16><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg18" class="achievement" order=17><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                </div>
+                <div id="sachDiv" class="achDiv">
+                    <div onclick="getAch(1,false)" id="sachImg1" class="achievement2" order=0><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div onclick="sAch2Click()" id="sachImg2" class="achievement2" order=1><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg3" class="achievement2" order=2><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg4" class="achievement2" order=3><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg5" class="achievement2" order=4><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg6" class="achievement2" order=5><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg7" class="achievement2" order=6><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg8" class="achievement2" order=7><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                </div>
+            </div>
+
+            <div id="stats_menu" class="content_menu">
+                <br>
+                <div id="stats_menu1">
+                    <font style="color: rgb(0, 204, 255); font-size: 2.5vw; font-weight: bold;">GENERAL</font> <br>
+                    <font id="stats1" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats1.1" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats2" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats3" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats4" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats5" style="font-size: 1.1vw; color: white;"></font>
+                    <font id="stats5.5" style="font-size: 1.1vw; color: white;"></font> <br><br>
+                    <font id="stats6" style="font-size: 1.1vw; color: white;"></font> <br><br>
+                    <font id="stats7.0" style="color: rgb(157, 0, 177); font-size: 2.5vw; font-weight: bold;">COLLAPSE</font> <br>
+                    <font id="stats7" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats8" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats9" style="font-size: 1.1vw; color: white;"></font> <br><br>
+                    <a class="gameLink" href="example.com">Github version</a><a class="gameLink" href="example.com">Youtube channel</a>
+                </div>
+                <div id="stats_menu2" class="stats_menu2">
+                    <font style="font-size: 2.5vw; font-weight: bold; color: white;">PAST COLLAPSES</font><br>
+                    <span id="record0">---</span><br>
+                    <span id="record1">---</span><br>
+                    <span id="record2">---</span><br>
+                    <span id="record3">---</span><br>
+                    <span id="record4">---</span><br>
+                    <span id="record5">---</span><br>
+                    <span id="record6">---</span><br>
+                    <span id="record7">---</span><br>
+                    <span id="record8">---</span><br>
+                    <span id="record9">---</span><br>
+                </div>
+                <div id="stats_menu3" style="width: 100%; height: 90%; overflow-y: scroll;">
+                    <br> <font style="color: rgb(255, 255, 255); font-size: 1vw; margin-bottom: 5%;">Here you can see what boosts what and how currency gains are calculated:</font> <br>
+                    <div onclick="toggleDropdown(1)" id="stats_effectsDiv1" class="stats_effectsDiv effect">ATOMS</div>
+                    <div id="stats_effectsDrop1" class="stats_effectsDrop">
+                        <font id="stats_effects1.1" style="color: white;font-size: 1vw;"></font>
+                        <font id="stats_effects1.2" style="color: white;font-size: 1vw;"></font>
+                        <font id="stats_effects1.3" style="color: white;font-size: 1vw;"></font>
+                    </div>
+                    <div onclick="toggleDropdown(2)" id="stats_effectsDiv2" class="stats_effectsDiv effect" style="color: yellow;">ENERGY</div>
+                    <div id="stats_effectsDrop2" class="stats_effectsDrop">
+                        <font id="stats_effects2.1" style="color: yellow;font-size: 1vw;"></font>
+                    </div>
+                    <div onclick="toggleDropdown(3)" id="stats_effectsDiv3" class="stats_effectsDiv effect" style="color: yellow;">ENERGY DIMENSIONS</div>
+                    <div id="stats_effectsDrop3" class="stats_effectsDrop">
+                        <font id="stats_effects3.1" style="color: yellow;font-size: 1vw;"></font>
+                        <font id="stats_effects3.2" style="color: yellow;font-size: 1vw;"></font>
+                    </div>
+                    <div onclick="toggleDropdown(4)" id="stats_effectsDiv4" class="stats_effectsDiv effect" style="color: cyan;">DIMENSIONAL EXPANSES</div>
+                    <div id="stats_effectsDrop4" class="stats_effectsDrop">
+                        <font style="color:cyan;font-size: 1vw;">Base: x2 | x16 | +0.35</font>
+                        <font id="stats_effects4.1" style="color:cyan;font-size: 1vw;">Above 10 expanses: ^1 | ^2 | x1</font>
+                    </div>
+                    <div onclick="toggleDropdown(5)" id="stats_effectsDiv5" class="stats_effectsDiv effect" style="color: yellow;">STARS</div>
+                    <div id="stats_effectsDrop5" class="stats_effectsDrop">
+                        <font style="color: yellow;font-size: 1vw;">Base: 100% power</font>
+                    </div>
+                </div>
+            </div>
+            <div id="options_menu" class="content_menu">
+                <font style="font-size: 2vw; font-weight: bold; color: white;">VISUAL SETTINGS</font> <br>
+                <div class="option effect"><font id="UIoption1"></font><br><input type="range" id="UIrateSlider" min="25" max="500" value="25"></div>
+                <div class="option effect"><font>Background effects:</font><br><input type="checkbox" id="bgEffCheckbox" checked></div>
+                <div class="option2 effect">
+                    <div class="options_topBardropdown">
+                        <button id="options_topBarbtn"></button>
+                        <div class="options_topBar">
+                            <a onclick="change_topBar(1)">News</a>
+                            <a onclick="change_topBar(2)">Percentage</a>
+                            <a onclick="change_topBar(3)">Currencies</a>
+                            <a onclick="change_topBar(4)">Title</a>
+                            <a onclick="change_topBar(5)">Nothing</a>
+                            <a onclick="change_topBar(6)">OFF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="option effect"><font id="UIoption2"></font><br><input type="range" id="newsSpeedSlider" min="50" max="200" value="100"><br><button id="resetNewsSpeed" class="option1-1 effect">100%</button></button></div>
+                <div class="option effect"><font id="UIoption3"></font><br><input type="range" id="fontSizeSlider" min="50" max="120" value="100"><br><button id="resetFontSize" class="option1-1 effect">100%</button></button></div>
+                <div class="option effect"><font id="UIoption4"></font><br><input type="range" id="precisionSlider" min="1" max="4" value="2"></div>
+                <div class="option2 effect">
+                    <div class="options_topBardropdown">
+                        <button id="options_notation"></button>
+                        <div class="options_topBar">
+                            <a onclick="change_notation(0)">Mixed scientific</a>
+                            <a onclick="change_notation(1)">Scientific</a>
+                            <a onclick="change_notation(2)">Engineering</a>
+                            <a onclick="change_notation(3)">Logarithm</a>
+                            <a onclick="change_notation(4)">Letters</a>
+                            <a onclick="change_notation(5)">Log2()</a>
+                            <a onclick="change_notation(6)">Double logarithm</a>
+                            <a onclick="change_notation(7)">Infinity</a>
+                            <a onclick="change_notation(8)">Blind</a>
+                        </div>
+                    </div>
+                </div> <br>
+                <font style="font-size: 2vw; font-weight: bold; color: white;">SAVE SETTINGS</font> <br>
+                <button onclick="saveGame()" class="option effect"><font>Save game</font></button>
+                <button onclick="exportGame()" class="option effect"><font>Export save</font></button>
+                <button onclick="importGame()" class="option effect"><font>Import save</font></button>
+                <button onclick="hardReset()" class="optionHard effect"><font>Hard reset</font></button> <br>
+                <font style="font-size: 2vw; font-weight: bold; color: white;">GAME SETTINGS</font> <br>
+                <div class="option effect"><font id="UIoption5"></font><br><input type="range" id="offlineTicksSlider" min="100" max="5000" value="1000"><br><button id="resetOfflineTicks" class="option1-1 effect">1000 ticks</button></button></div>
+                </div>
+                <div id="collapse_menu" class="content_menu">
+                    <div class="collapseBgEff"></div>
+                    <a style="color: white;">You reached the current endgame! Please share your feedback in the Galaxy comments! (also sorry for the janky collapse animation) [Also subscribe to Mamkagod on youtube {shameless plug}]</a>
+                </div>
+            </div>
+    </body>
+    <script src="Scripts/gameLoop.js"></script>
+    <script src="Scripts/varsAndBg.js"></script>
+    <script src="Scripts/achievements.js"></script>
+    <script src="Scripts/functions.js"></script>
+</html>
