@@ -528,7 +528,7 @@ function importGame() {
             loadGame();
 
         }catch(e) {
-            console.log('Error while importing safefile:', e,' Let there be dragons!');
+            if(imported == 'hard_reset'){console.log('Are you serious right now?')}else{console.log('Error while importing safefile:', e,' Let there be dragons!');}
         }
     }
 }
