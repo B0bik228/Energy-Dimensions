@@ -109,27 +109,27 @@ function closePopup()
 
 function newstickerEvent()
 {
-    if(tickerMessage == 'Click this newticker for nothing!')
+    if(tickerMessagee == 'Click this newticker for nothing!')
     {
         popup('Well...','you got nothing? But... you see this, so you kinda got something...','','Okay?')
     }
-    else if(tickerMessage == "Don't click this newticker!")
+    else if(tickerMessagee == "Don't click this newticker!")
     {
         popup('Hey!','I told you not to click it! You now get 0.0001% less atoms for 1 minute!','','Regret')
     }
-    else if(tickerMessage == "Or is it?")
+    else if(tickerMessagee == "Or is it?")
     {
         popup('Or is it?','Or is it?','Or is it?','Is it?')
     }
-    else if(tickerMessage == "Click this newsticker to win the game!")
+    else if(tickerMessagee == "Click this newsticker to win the game!")
     {
         popup('Insufficient material!',"Sorry, you don't have enough paperclips!",'','Bummer...')
     }
-    else if(tickerMessage == "If you tap here, you will delay the next update by 1 minute!")
+    else if(tickerMessagee == "If you tap here, you will delay the next update by 1 minute!")
     {
         popup('You monster',">:(",'','>:(')
     }
-    else if(tickerMessage == "Hey, can i borrow 5 second dimensions?")
+    else if(tickerMessagee == "Hey, can i borrow 5 second dimensions?")
     {
         if(game.energy_dims.energy_dim2.amount>Math.log10(5))
         {
@@ -137,12 +137,12 @@ function newstickerEvent()
             alert('Thanks')
         }
     }
-    else if(tickerMessage == "Tip: Clicking some newtickers can do something cool, maybe even give you a secret achievement!")
+    else if(tickerMessagee == "Tip: Clicking some newtickers can do something cool, maybe even give you a secret achievement!")
     {
         alert('Not this one!')
         if(!game.sAchievements.includes(8)){getAch(8,false)}
     }
-    else if(tickerMessage == "Alright, one 8th dimension... that will be [Infinity] atoms.")
+    else if(tickerMessagee == "Alright, one 8th dimension... that will be [Infinity] atoms.")
     {
         popup('Insufficient material!',"It appears your credit card has been declined, sir.",'Maybe try getting your money up.',':(')
     }
