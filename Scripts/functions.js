@@ -238,7 +238,7 @@ function ED_buy_all() {
 
 function options_change_font_size(a) {
     document.getElementById('dimExpanse1').style.fontSize = 1.1*a+'vw'
-    document.getElementById('dimExpanse2').style.fontSize = 1*a+'vw'
+    document.getElementById('dimExpanse2').style.fontSize = 0.9*a+'vw'
     document.getElementById('dimExpanse3').style.fontSize = 1.2*a+'vw'
     document.getElementById('dimExpanse4').style.fontSize = 0.9*a+'vw'
     document.getElementById('dimExpanse5').style.fontSize = 0.9*a+'vw'
@@ -291,7 +291,7 @@ function options_change_font_size(a) {
     document.getElementById('tickerMessage').style.fontSize = 1.2*a+'vw'
     document.getElementById('ED_buy_mode').style.fontSize = 0.8*a+'vw'
     document.getElementById('ED_buy_mode2').style.fontSize = 0.8*a+'vw'
-    document.getElementById('collapse_info1').style.fontSize = 1.3*a+'vw'
+    document.getElementById('collapse_info1').style.fontSize = 1.1*a+'vw'
     document.getElementById('collapse_info2').style.fontSize = 1.5*a+'vw'
     document.getElementById('collapse_info3').style.fontSize = 1.3*a+'vw'
 }
