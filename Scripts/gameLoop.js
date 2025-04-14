@@ -75,7 +75,7 @@ function UItick() //good luck
         document.getElementById('sacrifice1').textContent = 'LOCKED (x'+format(game.sacrifice.potential,true)+' / x1.5)'
     }
     let buy10MultRounded = game.energy_dims.buy10mult
-    document.getElementById('buy10-sacrifice').textContent = 'Buy 10 mutiplier: x'+buy10MultRounded.toFixed(game.settings.decimalPlaces)+' | Sacrifice: x'+format(game.sacrifice.eff,true)
+    document.getElementById('buy10-sacrifice').textContent = 'Buy 10: x'+buy10MultRounded.toFixed(game.settings.decimalPlaces)+' | Sacrifice: x'+format(game.sacrifice.eff,true)
     document.getElementById('energy_dim1').textContent = '('+game.energy_dims.energy_dim1.level+') Energy dimension 1: x'+format(game.energy_dims.energy_dim1.mult,true)
     document.getElementById('energy_dim2').textContent = '('+game.energy_dims.energy_dim2.level+') Energy dimension 2: x'+format(game.energy_dims.energy_dim2.mult,true)
     document.getElementById('energy_dim3').textContent = '('+game.energy_dims.energy_dim3.level+') Energy dimension 3: x'+format(game.energy_dims.energy_dim3.mult,true)
@@ -543,10 +543,10 @@ function gameTick() {
         game.collapse.collapsing = true
     }
     if(game.collapse.collapsing && game.atoms.amount>-1) {
-        game.collapse.collapseSpeed += 0.0003*(1+(Math.log(game.atoms.amount-550))/5)
-        game.collapse.collapseSpeed *= 1+0.00075*(1+(Math.log(game.atoms.amount-610))/10)
-        game.collapse.collDivider += game.collapse.collapseSpeed/40
-        game.atoms.amount -= game.collapse.collapseSpeed/40
+        game.collapse.collapseSpeed += 0.0003*(1+(Math.log(Math.max(550,game.atoms.amount-550)))/5)*Math.pow(10,offline_speed)
+        game.collapse.collapseSpeed *= 1+0.00075*(1+(Math.log(Math.max(610,game.atoms.amount-610)))/10)*Math.pow(10,offline_speed)
+        game.collapse.collDivider += game.collapse.collapseSpeed/40*Math.pow(10,offline_speed)
+        game.atoms.amount -= game.collapse.collapseSpeed/40*Math.pow(10,offline_speed)
                 if(game.atoms.amount<-1){
                     game.collapse.collapsing = false
                     collapse()
