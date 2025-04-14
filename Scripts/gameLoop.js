@@ -223,7 +223,7 @@ function UItick() //good luck
         if(game.atoms.amount>game.energy_dims.energy_dim3.cost){
                 dom.buyDim3.style.borderColor = 'green'
             }else{
-                dom.buyDim4.style.borderColor = 'red'
+                dom.buyDim3.style.borderColor = 'red'
             }
 
             if(game.atoms.amount>game.energy_dims.energy_dim4.cost){
