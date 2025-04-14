@@ -287,7 +287,7 @@ var defaults = {
 const notation1 = ['K','M','B','T','Qa','Qi','Sx','Sp','Oc','No','Dc',]
 const notation2 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 var tickerX = 100
-var tickerMessage = 'This is probably a newsticker... Or is it?'
+var tickerMessagee = 'This is probably a newsticker... Or is it?'
 const newsTickers = ['The eighth dimension is a lie',
     'Scientists spent over 800 million dollars to figure out, that burning money instead of coal is not that effective.',
     'New update in 6 hours!',
