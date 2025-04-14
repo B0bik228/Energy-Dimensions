@@ -33,39 +33,42 @@ function buyDim(num)
 function buyExpanse()
 {
     let enDim = game.energy_dims['energy_dim'+game.expanse.cost_type]
-    if(enDim.level>game.expanse.cost-1 && !game.collapse.collapsing)
+    if(!game.collapse.collapsing)
     {
-        game.expanse.amount ++
-        game.atoms.amount = -999
-        game.energy.amount = 0
-        game.atoms.atoms_s = -999
-        game.energy.eff = 0
-        game.energy.energy_s = -999
-        game.energy_dims.energy_dim1.amount = -999
-        game.energy_dims.energy_dim1.level = 0
-        game.energy_dims.energy_dim2.amount = -999
-        game.energy_dims.energy_dim2.level = 0
-        game.energy_dims.energy_dim3.amount = -999
-        game.energy_dims.energy_dim3.level = 0
-        game.energy_dims.energy_dim4.amount = -999
-        game.energy_dims.energy_dim4.level = 0
-        game.energy_dims.energy_dim5.amount = -999
-        game.energy_dims.energy_dim5.level = 0
-        game.energy_dims.energy_dim6.amount = -999
-        game.energy_dims.energy_dim6.level = 0
-        game.energy_dims.energy_dim7.amount = -999
-        game.energy_dims.energy_dim7.level = 0
-        game.energy_dims.tickspeed.amount = 0
-        game.energy_dims.tickspeed.eff = 0
-        game.sacrifice.eff = 0
-        game.expanse.eff2 = 0
-        game.expanse.eff1 = 0
-        if(game.achievements.includes(18)) {
-            game.atoms.amount = Math.log10(300)
+        if(enDim.level>game.expanse.cost-1){
+            game.expanse.amount ++
+            game.atoms.amount = -999
+            game.energy.amount = 0
+            game.atoms.atoms_s = -999
+            game.energy.eff = 0
+            game.energy.energy_s = -999
+            game.energy_dims.energy_dim1.amount = -999
+            game.energy_dims.energy_dim1.level = 0
+            game.energy_dims.energy_dim2.amount = -999
+            game.energy_dims.energy_dim2.level = 0
+            game.energy_dims.energy_dim3.amount = -999
+            game.energy_dims.energy_dim3.level = 0
+            game.energy_dims.energy_dim4.amount = -999
+            game.energy_dims.energy_dim4.level = 0
+            game.energy_dims.energy_dim5.amount = -999
+            game.energy_dims.energy_dim5.level = 0
+            game.energy_dims.energy_dim6.amount = -999
+            game.energy_dims.energy_dim6.level = 0
+            game.energy_dims.energy_dim7.amount = -999
+            game.energy_dims.energy_dim7.level = 0
+            game.energy_dims.tickspeed.amount = 0
+            game.energy_dims.tickspeed.eff = 0
+            game.sacrifice.eff = 0
+            game.expanse.eff2 = 0
+            game.expanse.eff1 = 0
+            if(game.achievements.includes(18)) {
+                game.atoms.amount = Math.log10(300)
+            }
         }
     }
     else{collapse()}
 }
+
 
 function buyStar()
 {
