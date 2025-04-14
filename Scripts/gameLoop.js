@@ -53,13 +53,20 @@ function UItick() //good luck
     dom.energy_eff3.textContent = ' generates '
     dom.energy_eff4.textContent = format(game.energy.eff, true)
     dom.energy_eff5.textContent = ' atoms per second.'
-    if(game.energy_dims.energy_dim7.level<10){
-        dom.sacrifice1.textContent = 'LOCKED ('+game.energy_dims.energy_dim7.level+'x / 10x 7th EDs)'
-    }else if(game.sacrifice.potential>Math.log10(1.5)){
-        dom.sacrifice1.textContent = 'Sacrifice (x'+format(game.sacrifice.potential,true)+')'
-    }else{
-        dom.sacrifice1.textContent = 'LOCKED (x'+format(game.sacrifice.potential,true)+' / x1.5)'
+
+    let newText;
+    if (game.energy_dims.energy_dim7.level < 10) {
+        newText = `LOCKED (${game.energy_dims.energy_dim7.level}x / 10x 7th EDs)`;
+    } else if (game.sacrifice.potential > Math.log10(1.5)) {
+        newText = `Sacrifice (x${format(game.sacrifice.potential, true)})`;
+    } else {
+        newText = `LOCKED (x${format(game.sacrifice.potential, true)} / x1.5)`;
     }
+
+    if (dom.sacrifice1.textContent !== newText) {
+        dom.sacrifice1.textContent = newText;
+    }
+
     let buy10MultRounded = game.energy_dims.buy10mult
     dom.buy10Sacrifice.textContent = 'Buy 10: x'+buy10MultRounded.toFixed(game.settings.decimalPlaces)+' | Sacrifice: x'+format(game.sacrifice.eff,true)
     dom.energy_dim1.textContent = '('+game.energy_dims.energy_dim1.level+') Energy dimension 1: x'+format(game.energy_dims.energy_dim1.mult,true)
@@ -87,22 +94,23 @@ function UItick() //good luck
     dom.tickspeed2.textContent = 'Cost: '+format(game.energy_dims.tickspeed.cost,true)+' atoms'
     dom.tickspeed3.textContent = 'Tickspeed: '+format(game.energy_dims.tickspeed.eff,true)+'/s'
     dom.dimExpanse1.textContent = '('+game.expanse.amount+') Dimensional expanse'
-    if(game.expanse.amount == 0){
-        dom.dimExpanse2.textContent = 'Reset your dimensions to unlock a new dimension and increase all expanse bonuses.'
-        dom.dimExpanse3.textContent = 'Cost: '+game.expanse.cost+' 3rd EDs'
-    }else if(game.expanse.amount == 1){
-        dom.dimExpanse2.textContent = 'Reset your dimensions to unlock a new dimension and increase all expanse bonuses.'
-        dom.dimExpanse3.textContent = 'Cost: '+game.expanse.cost+' 4th EDs'
-    }else if(game.expanse.amount == 2){
-        dom.dimExpanse2.textContent = 'Reset your dimensions to unlock a new dimension and increase all expanse bonuses.'
-        dom.dimExpanse3.textContent = 'Cost: '+game.expanse.cost+' 5th EDs'
-    }else if(game.expanse.amount == 3){
-        dom.dimExpanse2.textContent = 'Reset your dimensions to unlock a new dimension and increase all expanse bonuses.'
-        dom.dimExpanse3.textContent = 'Cost: '+game.expanse.cost+' 6th EDs'
-    }else if(game.expanse.amount > 3){
-        dom.dimExpanse2.textContent = 'Reset your dimensions increase all expanse bonuses.'
-        dom.dimExpanse3.textContent = 'Cost: '+game.expanse.cost+' 7th EDs'
+
+    let dimExpTier = Math.min(game.expanse.amount + 3, 7);
+    let dimExpcostText = `Cost: ${game.expanse.cost} ${dimExpTier}th EDs`;
+    if(dom.dimExpanse3.textContent !== dimExpcostText){
+        dom.dimExpanse3.textContent = dimExpcostText;
     }
+
+    let dimExpInfo
+    if(game.expanse.amount>3){
+        dimExpInfo = 'Reset your dimensions increase all expanse bonuses.'
+    }else{
+        dimExpInfo = 'Reset your dimensions to unlock a new dimension and increase all expanse bonuses.'
+    }
+    if (dom.dimExpanse2.textContent !== dimExpInfo) {
+        dom.dimExpanse2.textContent = dimExpInfo;
+    }
+
     dom.dimExpanse4.textContent = 'Odd: x'+format(game.expanse.eff1,true)+' all ED mults'
     dom.dimExpanse5.textContent = 'Even: x'+format(game.expanse.eff2,true)+' atoms'
     let expanseEff3Rounded = game.expanse.eff3
@@ -131,12 +139,18 @@ function UItick() //good luck
     dom.stats5.textContent = '...and '+game.sAchievements.length+' secret ones.'
     dom.stats5_5.textContent = 'You clicked the 2nd secret achievement '+game.stats.sAch2Clicks+' times.'
     if(game.stats.sAch2Clicks>99){dom.stats5_5.style.display = 'block'}else{dom.stats5_5.style.display = 'none'}
-    if(game.atoms.amount<10){dom.stats6.textContent = 'If your atoms were, well, atoms, you would have enough to build '+format(game.atoms.amount-Math.log10(24),true)+' glucose molecules.'}
-    else if(game.atoms.amount<23){dom.stats6.textContent = 'With your atoms you could build '+format(game.atoms.amount-Math.log10(6.0e9),true)+' human DNA molecules.'}
-    else if(game.atoms.amount<28){dom.stats6.textContent = 'With your atoms you could make '+format(game.atoms.amount-23,true)+' water droplets.'}
-    else if(game.atoms.amount<50){dom.stats6.textContent = 'With your atoms you could make '+format(game.atoms.amount-28.301,true)+' 2003 Nissan Muranos.'}
-    else if(game.atoms.amount<1000){dom.stats6.textContent = 'With your atoms you could cause about '+format(game.atoms.amount-50,true)+' supernovae. (probably)'}
-    else if(game.atoms.amount<1.0e300){dom.stats6.textContent = 'If writing out your atom amount at 3 digits/s was a job paying 8$ an hour, by the end you would earn '+Math.floor(game.atoms.amount/3/3600*8000)/1000+' dollary-doos.'}
+
+    let stats6TextContent
+    if(game.atoms.amount<10){stats6TextContent = 'If your atoms were, well, atoms, you would have enough to build '+format(game.atoms.amount-Math.log10(24),true)+' glucose molecules.'}
+    else if(game.atoms.amount<23){stats6TextContent = 'With your atoms you could build '+format(game.atoms.amount-Math.log10(6.0e9),true)+' human DNA molecules.'}
+    else if(game.atoms.amount<28){stats6TextContent = 'With your atoms you could make '+format(game.atoms.amount-23,true)+' water droplets.'}
+    else if(game.atoms.amount<50){stats6TextContent = 'With your atoms you could make '+format(game.atoms.amount-28.301,true)+' 2003 Nissan Muranos.'}
+    else if(game.atoms.amount<1000){stats6TextContent = 'With your atoms you could cause about '+format(game.atoms.amount-50,true)+' supernovae. (probably)'}
+    else if(game.atoms.amount<1.0e300){stats6TextContent = 'If writing out your atom amount at 3 digits/s was a job paying 8$ an hour, by the end you would earn '+Math.floor(game.atoms.amount/3/3600*8000)/1000+' dollary-doos.'}
+    if(dom.stats6.textContent !== stats6TextContent){
+        dom.stats6.textContent = stats6TextContent
+    }
+    
     if(game.collapse.bestCollapsePoints>-2){
         dom.stats7_0.textContent = 'COLLAPSE'
         dom.stats7.textContent = 'You spent '+format(game.stats.timeInCollapse,false)+' in this collapse.'
@@ -323,16 +337,26 @@ function UItick() //good luck
     } else{
         dom.menu5.style.display = 'none'
     }
+
+    let stat4DivDisplay
     if(game.atoms.total>4){
-        dom.stats_effectsDiv4.style.display = 'block'
+        stat4DivDisplay = 'block'
     } else{
-        dom.stats_effectsDiv4.style.display = 'none'
+        stat4DivDisplay = 'none'
     }
-        if(game.expanse.best>2){
-            dom.stats_effectsDiv5.style.display = 'block'
-        } else{
-            dom.stats_effectsDiv5.style.display = 'none'
-        }
+    if(dom.stats_effectsDiv4.style.display !== stat4DivDisplay){
+        dom.stats_effectsDiv4.style.display = stat4DivDisplay
+    }
+
+    let stat5DivDisplay
+    if(game.expanse.best>2){
+        stat5DivDisplay = 'block'
+    }else{
+        stat5DivDisplay = 'none'
+    }
+    if(dom.stats_effectsDiv5.style.display !== stat5DivDisplay){
+        dom.stats_effectsDiv5.style.display = stat5DivDisplay
+    }
 }
 
 function gameTick() {
