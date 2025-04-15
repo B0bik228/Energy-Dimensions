@@ -1,9 +1,16 @@
 function UItick() //good luck
 {
-    dom.tickerMessage.textContent = tickerMessagee
-    dom.tickerMessage.style.left = tickerX+'%'
-    if(tickerX<(tickerMessage == 'oops sorry wrong direction'?(100+tickerMessagee.length*1.3):(0-tickerMessagee.length*1.3)) && game.settings.topBar == 0)
-    {
+    let tickermsg = tickerMessagee
+    if(dom.tickerMessage.textContent !== tickermsg){
+        dom.tickerMessage.textContent = tickermsg
+    }
+
+    let tcrkX = tickerX+'%'
+    if(dom.tickerMessage.style.left !== tcrkX){
+        dom.tickerMessage.style.left = tcrkX
+    }
+
+    if(tickerX<(tickerMessagee == 'oops sorry wrong direction'?(100+tickerMessagee.length*1.3):(0-tickerMessagee.length*1.3)) && game.settings.topBar == 0){
         tickerMessagee = newsTickers[Math.floor(Math.random()*newsTickers.length)]
         tickerX = tickerMessagee == 'oops sorry wrong direction'?-20:100
         game.stats.tickers_seen ++
@@ -36,23 +43,32 @@ function UItick() //good luck
     }else{
         dom.newsticker.style.display = 'block'
     }
-    dom.atoms1.textContent = 'You have '
-    dom.atoms2.textContent = format(game.atoms.amount, true)
-    dom.atoms3.textContent = ' atoms.'
-    dom.atoms_s1.textContent = 'You are making '
-    dom.atoms_s2.textContent = format(game.atoms.atoms_s, true)
-    dom.atoms_s3.textContent = ' every second.'
-    dom.energy1.textContent = 'Your dimensions produced '
-    dom.energy2.textContent = format(game.energy.amount, true)
-    dom.energy3.textContent = ' energy. (+'
-    dom.energy4.textContent = format(game.energy.energy_s, true)
-    dom.energy5.textContent = '/s)'
-    dom.energy_eff1.textContent = 'Energy raised by '
+
+    let atoms2Text = format(game.atoms.amount, true)
+    let atoms_s2Text = format(game.atoms.atoms_s, true)
+    let energy2Text = format(game.energy.amount, true)
+    let energy4Text = format(game.energy.energy_s, true)
     let energyExpRounded = game.energy.exp
-    dom.energy_eff2.textContent = '^'+energyExpRounded.toFixed(game.settings.decimalPlaces)
-    dom.energy_eff3.textContent = ' generates '
-    dom.energy_eff4.textContent = format(game.energy.eff, true)
-    dom.energy_eff5.textContent = ' atoms per second.'
+    let energy_eff2Text = '^'+energyExpRounded.toFixed(game.settings.decimalPlaces)
+    let energy_eff4Text = format(game.energy.eff, true)
+    if(dom.atoms2.textContent !== atoms2Text){
+        dom.atoms2.textContent = atoms2Text;
+    }
+    if(dom.atoms_s2.textContent !== atoms_s2Text){
+        dom.atoms_s2.textContent = atoms_s2Text;
+    }
+    if(dom.energy2.textContent !== energy2Text){
+        dom.energy2.textContent = energy2Text;
+    }
+    if(dom.energy4.textContent !== energy4Text){
+        dom.energy4.textContent = energy4Text;
+    }
+    if(dom.energy_eff2.textContent !== energy_eff2Text){
+        dom.energy_eff2.textContent = energy_eff2Text;
+    }
+    if(dom.energy_eff4.textContent !== energy_eff4Text){
+        dom.energy_eff4.textContent = energy_eff4Text;
+    }
 
     let newText;
     if (game.energy_dims.energy_dim7.level < 10) {
@@ -63,43 +79,51 @@ function UItick() //good luck
         newText = `LOCKED (x${format(game.sacrifice.potential, true)} / x1.5)`;
     }
 
-    if (dom.sacrifice1.textContent !== newText) {
+    if(dom.sacrifice1.textContent !== newText){
         dom.sacrifice1.textContent = newText;
     }
 
-    let buy10MultRounded = game.energy_dims.buy10mult
-    dom.buy10Sacrifice.textContent = 'Buy 10: x'+buy10MultRounded.toFixed(game.settings.decimalPlaces)+' | Sacrifice: x'+format(game.sacrifice.eff,true)
-    dom.energy_dim1.textContent = '('+game.energy_dims.energy_dim1.level+') Energy dimension 1: x'+format(game.energy_dims.energy_dim1.mult,true)
-    dom.energy_dim2.textContent = '('+game.energy_dims.energy_dim2.level+') Energy dimension 2: x'+format(game.energy_dims.energy_dim2.mult,true)
-    dom.energy_dim3.textContent = '('+game.energy_dims.energy_dim3.level+') Energy dimension 3: x'+format(game.energy_dims.energy_dim3.mult,true)
-    dom.energy_dim4.textContent = '('+game.energy_dims.energy_dim4.level+') Energy dimension 4: x'+format(game.energy_dims.energy_dim4.mult,true)
-    dom.energy_dim5.textContent = '('+game.energy_dims.energy_dim5.level+') Energy dimension 5: x'+format(game.energy_dims.energy_dim5.mult,true)
-    dom.energy_dim6.textContent = '('+game.energy_dims.energy_dim6.level+') Energy dimension 6: x'+format(game.energy_dims.energy_dim6.mult,true)
-    dom.energy_dim7.textContent = '('+game.energy_dims.energy_dim7.level+') Energy dimension 7: x'+format(game.energy_dims.energy_dim7.mult,true)
-    dom.energy_dim1_1.textContent = format(game.energy_dims.energy_dim1.amount,true)
-    dom.energy_dim2_1.textContent = format(game.energy_dims.energy_dim2.amount,true)
-    dom.energy_dim3_1.textContent = format(game.energy_dims.energy_dim3.amount,true)
-    dom.energy_dim4_1.textContent = format(game.energy_dims.energy_dim4.amount,true)
-    dom.energy_dim5_1.textContent = format(game.energy_dims.energy_dim5.amount,true)
-    dom.energy_dim6_1.textContent = format(game.energy_dims.energy_dim6.amount,true)
-    dom.energy_dim7_1.textContent = format(game.energy_dims.energy_dim7.amount,true)
-    dom.buyDimCost1.textContent = format(game.energy_dims.energy_dim1.cost,true)+' atoms'
-    dom.buyDimCost2.textContent = format(game.energy_dims.energy_dim2.cost,true)+' atoms'
-    dom.buyDimCost3.textContent = format(game.energy_dims.energy_dim3.cost,true)+' atoms'
-    dom.buyDimCost4.textContent = format(game.energy_dims.energy_dim4.cost,true)+' atoms'
-    dom.buyDimCost5.textContent = format(game.energy_dims.energy_dim5.cost,true)+' atoms'
-    dom.buyDimCost6.textContent = format(game.energy_dims.energy_dim6.cost,true)+' atoms'
-    dom.buyDimCost7.textContent = format(game.energy_dims.energy_dim7.cost,true)+' atoms'
-    dom.tickspeed1.textContent = '('+game.energy_dims.tickspeed.amount+') Increase tickspeed by x'+format(game.energy_dims.tickspeed.base,true)
-    dom.tickspeed2.textContent = 'Cost: '+format(game.energy_dims.tickspeed.cost,true)+' atoms'
-    dom.tickspeed3.textContent = 'Tickspeed: '+format(game.energy_dims.tickspeed.eff,true)+'/s'
-    dom.dimExpanse1.textContent = '('+game.expanse.amount+') Dimensional expanse'
+    const ed = game.energy_dims;
+    const settings = game.settings;
 
-    let dimExpTier = Math.min(game.expanse.amount + 3, 7);
-    let dimExpcostText = `Cost: ${game.expanse.cost} ${dimExpTier}th EDs`;
-    if(dom.dimExpanse3.textContent !== dimExpcostText){
-        dom.dimExpanse3.textContent = dimExpcostText;
+    const buy10MultRounded = ed.buy10mult.toFixed(settings.decimalPlaces);
+    const sacrificeEffFormatted = format(game.sacrifice.eff, true);
+    const buy10Text = `Buy 10: x${buy10MultRounded} | Sacrifice: x${sacrificeEffFormatted}`;
+    if (dom.buy10Sacrifice.textContent !== buy10Text) dom.buy10Sacrifice.textContent = buy10Text;
+
+    for (let i = 1; i <= 7; i++) {
+        const dim = ed[`energy_dim${i}`];
+        
+        const label = `(${dim.level}) Energy dimension ${i}: x${format(dim.mult, true)}`;
+        const amount = format(dim.amount, true);
+        const cost = `${format(dim.cost, true)} atoms`;
+
+        const labelEl = dom[`energy_dim${i}`];
+        const amountEl = dom[`energy_dim${i}_1`];
+        const costEl = dom[`buyDimCost${i}`];
+
+        if (labelEl.textContent !== label) labelEl.textContent = label;
+        if (amountEl.textContent !== amount) amountEl.textContent = amount;
+        if (costEl.textContent !== cost) costEl.textContent = cost;
     }
+
+    const tick = ed.tickspeed;
+    const tickspeed1Text = `(${tick.amount}) Increase tickspeed by x${format(tick.base, true)}`;
+    const tickspeed2Text = `Cost: ${format(tick.cost, true)} atoms`;
+    const tickspeed3Text = `Tickspeed: ${format(tick.eff, true)}/s`;
+
+    if (dom.tickspeed1.textContent !== tickspeed1Text) dom.tickspeed1.textContent = tickspeed1Text;
+    if (dom.tickspeed2.textContent !== tickspeed2Text) dom.tickspeed2.textContent = tickspeed2Text;
+    if (dom.tickspeed3.textContent !== tickspeed3Text) dom.tickspeed3.textContent = tickspeed3Text;
+
+    const dimExpanseText = `(${game.expanse.amount}) Dimensional expanse`;
+    if (dom.dimExpanse1.textContent !== dimExpanseText) dom.dimExpanse1.textContent = dimExpanseText;
+
+        let dimExpTier = Math.min(game.expanse.amount + 3, 7);
+        let dimExpcostText = `Cost: ${game.expanse.cost} ${dimExpTier}th EDs`;
+        if(dom.dimExpanse3.textContent !== dimExpcostText){
+            dom.dimExpanse3.textContent = dimExpcostText;
+        }
 
     let dimExpInfo
     if(game.expanse.amount>3){
@@ -128,17 +152,38 @@ function UItick() //good luck
         dom.dimExpanse5.style.opacity = 1
         dom.dimExpanse6.style.opacity = 0.6
     }
-    dom.stars1.textContent = '('+game.stars.amount+') Energy star'
-    dom.stars2.textContent = 'Reset all progress to improve the energy exponent.'
-    dom.stars3.textContent = 'Cost: '+game.stars.cost+' 7th EDs'
-    dom.stats1.textContent = 'You have made a total of '+format(game.atoms.total,true)+' atoms'
-    dom.stats1_1.textContent = 'The most amount of atoms you ever had was '+format(game.stats.bestPoints,true)
-    dom.stats2.textContent = 'You have spent '+format(game.stats.playtime,false)+' playing this game.'
-    dom.stats3.textContent = 'You have seen '+game.stats.tickers_seen+' news messages in total.'
-    dom.stats4.textContent = 'You have unlocked '+game.achievements.length+' normal achievements...'
-    dom.stats5.textContent = '...and '+game.sAchievements.length+' secret ones.'
-    dom.stats5_5.textContent = 'You clicked the 2nd secret achievement '+game.stats.sAch2Clicks+' times.'
-    if(game.stats.sAch2Clicks>99){dom.stats5_5.style.display = 'block'}else{dom.stats5_5.style.display = 'none'}
+
+    const starsText1 = `(${game.stars.amount}) Energy star`;
+    if (dom.stars1.textContent !== starsText1) dom.stars1.textContent = starsText1;
+
+    const starsText3 = `Cost: ${game.stars.cost} 7th EDs`;
+    if (dom.stars3.textContent !== starsText3) dom.stars3.textContent = starsText3;
+
+    if(game.menu == 3){
+        const totalAtoms = format(game.atoms.total, true);
+        const bestAtoms = format(game.stats.bestPoints, true);
+        const playtime = format(game.stats.playtime, false);
+        const tickersSeen = game.stats.tickers_seen;
+        const achCount = game.achievements.length;
+        const secretAchCount = game.sAchievements.length;
+        const sAch2Clicks = game.stats.sAch2Clicks;
+
+        const statsUpdates = [
+            { el: dom.stats1, text: `You have made a total of ${totalAtoms} atoms` },
+            { el: dom.stats1_1, text: `The most amount of atoms you ever had was ${bestAtoms}` },
+            { el: dom.stats2, text: `You have spent ${playtime} playing this game.` },
+            { el: dom.stats3, text: `You have seen ${tickersSeen} news messages in total.` },
+            { el: dom.stats4, text: `You have unlocked ${achCount} normal achievements...` },
+            { el: dom.stats5, text: `...and ${secretAchCount} secret ones.` },
+            { el: dom.stats5_5, text: `You clicked the 2nd secret achievement ${sAch2Clicks} times.` },
+        ];
+
+        for (const { el, text } of statsUpdates) {
+            if (el.textContent !== text) el.textContent = text;
+        }
+
+        dom.stats5_5.style.display = sAch2Clicks > 99 ? 'block' : 'none';
+    }
 
     let stats6TextContent
     if(game.atoms.amount<10){stats6TextContent = 'If your atoms were, well, atoms, you would have enough to build '+format(game.atoms.amount-Math.log10(24),true)+' glucose molecules.'}
@@ -153,15 +198,45 @@ function UItick() //good luck
     
     if(game.collapse.bestCollapsePoints>-2){
         dom.stats7_0.textContent = 'COLLAPSE'
-        dom.stats7.textContent = 'You spent '+format(game.stats.timeInCollapse,false)+' in this collapse.'
-        dom.stats8.textContent = 'The best amount of CP you ever had was '+format(game.collapse.bestCollapsePoints,true)+'.'
-        dom.stats9.textContent = 'You have earned a total of '+format(game.collapse.totalCollapsePoints,true)+' CP.'
+        if(dom.stats7_0.textContent !== 'COLLAPSE'){
+            dom.stats7_0.textContent = 'COLLAPSE'
+        }
+
+        const timeCollapseSpent = 'You spent '+format(game.stats.timeInCollapse,false)+' in this collapse.'
+        if(dom.stats7.textContent !== timeCollapseSpent){
+            dom.stats7.textContent = timeCollapseSpent
+        }
+
+        const bestCPever = 'The best amount of CP you ever had was '+format(game.collapse.bestCollapsePoints,true)+'.'
+        if(dom.stats8.textContent !== bestCPever){
+            dom.stats8.textContent = bestCPever
+        }
+
+        const totalCPever = 'You have earned a total of '+format(game.collapse.totalCollapsePoints,true)+' CP.'
+        if(dom.stats9.textContent !== totalCPever){
+            dom.stats9.textContent = totalCPever
+        }
     }//MADE BY MAMKAGOD!
     else{
         dom.stats7_0.textContent = ''
+        if(dom.stats7_0.textContent !== ''){
+            dom.stats7_0.textContent = ''
+        }
+
         dom.stats7.textContent = ''
+        if(dom.stats7.textContent !== ''){
+            dom.stats7.textContent = ''
+        }
+
         dom.stats8.textContent = ''
+        if(dom.stats8.textContent !== ''){
+            dom.stats8.textContent = ''
+        }
+
         dom.stats9.textContent = ''
+        if(dom.stats9.textContent !== ''){
+            dom.stats9.textContent = ''
+        }
     }
     if(game.stars.best>0){
         dom.ED_buy_mode2.style.display = 'inline-block'
@@ -170,122 +245,133 @@ function UItick() //good luck
         dom.ED_buy_mode2.style.display = 'none'
         dom.stats_effects1_3.style.display = 'none'
     }
-    dom.stats_effects1_1.textContent = 'Energy: +'+format(game.energy.eff,true)
-    dom.stats_effects1_2.textContent = 'Dim. expanses: x'+format(game.expanse.eff2,true)
-    dom.stats_effects1_3.textContent = 'Stars: x'+format(Math.log10(2)*game.stars.amount,true)
-    dom.stats_effects2_1.textContent = 'Energy dimension 1: +'+format(game.energy_dims.energy_dim1.amount+game.energy_dims.energy_dim1.mult-Math.log10(50),true)
-    dom.stats_effects3_1.textContent = 'Tickspeed: x'+format(game.energy_dims.tickspeed.eff,true)
-    dom.stats_effects3_2.textContent = 'Dim. expanses: x'+format(game.expanse.eff1,true)
-    dom.stats_effects4_1.textContent = 'Above 10 expanses: ^1 | ^'+Math.floor(game.expanse.amount/10+1)+' | x1'
-    dom.ach_boost.textContent = 'Achievements boost EDs by x'+format(game.achievement_boost1,true)
-    dom.progressBar.textContent = 'Progress to collapse: '+Math.floor(game.atoms.amount/6.165*100)/100+'%'
-    dom.progressBar2.style.width = Math.floor(game.atoms.amount/6.165*100)/100+'%'
-    dom.UIoption1.textContent = 'UI update rate: '+game.settings.UIrate+'ms'
-    dom.UIoption2.textContent = 'News speed: '+game.settings.newsSpeed*100+'%'
-    dom.UIoption3.textContent = 'Font size: '+game.settings.fontSize*100+'%'
-    dom.UIoption4.textContent = 'Precision: '+game.settings.decimalPlaces+' digits'
-    dom.UIoption5.textContent = 'Max offline ticks: '+game.settings.offlineTicks
-    dom.options_topBarbtn.textContent = 'Top bar: '+game.settings.topBartext[game.settings.topBar]
-    dom.options_notation.textContent = 'Notation: '+game.settings.notationNames[game.settings.notation]
-    dom.collapse_info1.textContent = 'Your atoms are condensing by /'
-    dom.collapse_info2.textContent = format(game.collapse.collapseSpeed,true)
-    dom.collapse_info3.textContent = ' every second! Beware!'
-    if(game.collapse.collapsing){
-        dom.collapse_info.style.display = 'inline-block'
-    }else{
-        dom.collapse_info.style.display = 'none'
+
+    const energyEff = format(game.energy.eff, true);
+    const expanseEff2 = format(game.expanse.eff2, true);
+    const starEff = format(Math.log10(2) * game.stars.amount, true);
+    const ed1Combined = format(game.energy_dims.energy_dim1.amount + game.energy_dims.energy_dim1.mult - Math.log10(50), true);
+    const tickspeedEff = format(game.energy_dims.tickspeed.eff, true);
+    const expanseEff1 = format(game.expanse.eff1, true);
+    const expansePower = Math.floor(game.expanse.amount / 10 + 1);
+    const achBoost = format(game.achievement_boost1, true);
+
+    const statLines = [
+    { el: dom.stats_effects1_1, text: `Energy: +${energyEff}` },
+    { el: dom.stats_effects1_2, text: `Dim. expanses: x${expanseEff2}` },
+    { el: dom.stats_effects1_3, text: `Stars: x${starEff}` },
+    { el: dom.stats_effects2_1, text: `Energy dimension 1: +${ed1Combined}` },
+    { el: dom.stats_effects3_1, text: `Tickspeed: x${tickspeedEff}` },
+    { el: dom.stats_effects3_2, text: `Dim. expanses: x${expanseEff1}` },
+    { el: dom.stats_effects4_1, text: `Above 10 expanses: ^1 | ^${expansePower} | x1` },
+    { el: dom.ach_boost, text: `Achievements boost EDs by x${achBoost}` },
+    ];
+
+    for (const { el, text } of statLines) {
+    if (el.textContent !== text) el.textContent = text;
     }
 
-    if(game.energy_dims.buy_mode==0){
-        dom.ED_buy_mode.innerHTML = 'Buying max'
-    }else{
-        dom.ED_buy_mode.innerHTML = 'Buying 1'
+    const collapseProgress = Math.floor((game.atoms.amount / 6.165) * 100) / 100;
+    const progressText = `Progress to collapse: ${collapseProgress}%`;
+    const progressWidth = `${collapseProgress}%`;
+
+    if (dom.progressBar.textContent !== progressText) dom.progressBar.textContent = progressText;
+    if (dom.progressBar2.style.width !== progressWidth) dom.progressBar2.style.width = progressWidth;
+
+    const UIrateText = `UI update rate: ${game.settings.UIrate}ms`;
+    const newsSpeedText = `News speed: ${game.settings.newsSpeed * 100}%`;
+    const fontSizeText = `Font size: ${game.settings.fontSize * 100}%`;
+    const precisionText = `Precision: ${game.settings.decimalPlaces} digits`;
+    const offlineTicksText = `Max offline ticks: ${game.settings.offlineTicks}`;
+    const topBarText = `Top bar: ${game.settings.topBartext[game.settings.topBar]}`;
+    const notationText = `Notation: ${game.settings.notationNames[game.settings.notation]}`;
+
+    const optionLines = [
+    { el: dom.UIoption1, text: UIrateText },
+    { el: dom.UIoption2, text: newsSpeedText },
+    { el: dom.UIoption3, text: fontSizeText },
+    { el: dom.UIoption4, text: precisionText },
+    { el: dom.UIoption5, text: offlineTicksText },
+    { el: dom.options_topBarbtn, text: topBarText },
+    { el: dom.options_notation, text: notationText },
+    ];
+
+    for (const { el, text } of optionLines) {
+    if (el.textContent !== text) el.textContent = text;
     }
 
-    if(game.expanse.best>0){
-        dom.stats_effects1_2.style.display = 'block'
-    }else{
-        dom.stats_effects1_2.style.display = 'none'
+    const collapseText2 = format(game.collapse.collapseSpeed, true);
+    if (dom.collapse_info2.textContent !== collapseText2) dom.collapse_info2.textContent = collapseText2;
+
+    dom.collapse_info.style.display = game.collapse.collapsing ? 'inline-block' : 'none';
+
+    const buyModeText = game.energy_dims.buy_mode === 0 ? 'Buying max' : 'Buying 1';
+    if (dom.ED_buy_mode.innerHTML !== buyModeText) {
+        dom.ED_buy_mode.innerHTML = buyModeText;
     }
 
-    if(game.atoms.amount>game.energy_dims.energy_dim1.cost){
-        dom.buyDim1.style.borderColor = 'green'
-    }else{
-        dom.buyDim1.style.borderColor = 'red'
-    }
+    dom.stats_effects1_2.style.display = game.expanse.best > 0 ? 'block' : 'none';
 
-    if(game.atoms.amount>game.energy_dims.energy_dim2.cost){
-            dom.buyDim2.style.borderColor = 'green'
-        }else{
-            dom.buyDim2.style.borderColor = 'red'
+    for (let i = 1; i <= 7; i++) {
+        const cost = game.energy_dims[`energy_dim${i}`].cost;
+        const el = dom[`buyDim${i}`];
+        const color = game.atoms.amount > cost ? 'green' : 'red';
+
+        if (el.style.borderColor !== color) {
+            el.style.borderColor = color;
         }
-
-        if(game.atoms.amount>game.energy_dims.energy_dim3.cost){
-                dom.buyDim3.style.borderColor = 'green'
-            }else{
-                dom.buyDim3.style.borderColor = 'red'
-            }
-
-            if(game.atoms.amount>game.energy_dims.energy_dim4.cost){
-                    dom.buyDim4.style.borderColor = 'green'
-                }else{
-                    dom.buyDim4.style.borderColor = 'red'
-                }
-
-                if(game.atoms.amount>game.energy_dims.energy_dim5.cost){
-                        dom.buyDim5.style.borderColor = 'green'
-                    }else{
-                        dom.buyDim5.style.borderColor = 'red'
-                    }
-
-                    if(game.atoms.amount>game.energy_dims.energy_dim6.cost){
-                            dom.buyDim6.style.borderColor = 'green'
-                        }else{
-                            dom.buyDim6.style.borderColor = 'red'
-                        }
-
-                        if(game.atoms.amount>game.energy_dims.energy_dim7.cost){
-                                dom.buyDim7.style.borderColor = 'green'
-                            }else{
-                                dom.buyDim7.style.borderColor = 'red'
-                            }
-
-    if(game.expanse.best>0){
-        dom.dim4.style.display = 'block'
-    }else{
-        dom.dim4.style.display = 'none'
     }
 
-    if(game.expanse.best>1){
-            dom.dim5.style.display = 'block'
-        }else{
-            dom.dim5.style.display = 'none'
-        }
-        if(game.expanse.best>9){
-                dom.stats_effects4_1.style.display = 'block'
-            }else{
-                dom.stats_effects4_1.style.display = 'none'
-            }
+    let dim4StyleDisplay
+    if(game.expanse.best>0){
+        dim4StyleDisplay = 'block'
+    }else{
+        dim4StyleDisplay = 'none'
+    }
+    if(dom.dim4.style.display !== dim4StyleDisplay){
+        dom.dim4.style.display = dim4StyleDisplay
+    }
 
-        if(game.expanse.best>2){
-                dom.dim6.style.display = 'block'
-                dom.buyStar.style.display = 'inline-block'
-                dom.stars1.style.display = 'inline'
-                dom.stats_effectsDiv5.style.display = 'block'
-            }else{
-                dom.dim6.style.display = 'none'
-                dom.buyStar.style.display = 'none'
-                dom.stars1.style.display = 'none'
-                dom.stats_effectsDiv5.style.display = 'none'
-            }
+    let dim5StyleDisplay
+    if(game.expanse.best>0){
+        dim5StyleDisplay = 'block'
+    }else{
+        dim5StyleDisplay = 'none'
+    }
+    if(dom.dim5.style.display !== dim5StyleDisplay){
+        dom.dim5.style.display = dim5StyleDisplay
+    }
 
-            if(game.expanse.best>3){
-                    dom.dim7.style.display = 'block'
-                    dom.sacrificeStuff.style.display = '-block'
-                }else{
-                    dom.dim7.style.display = 'none'
-                    dom.sacrificeStuff.style.display = 'none'
-                }
+    let dim6StyleDisplay
+    if(game.expanse.best>0){
+        dim6StyleDisplay = 'block'
+    }else{
+        dim6StyleDisplay = 'none'
+    }
+    if(dom.dim6.style.display !== dim6StyleDisplay){
+        dom.dim6.style.display = dim6StyleDisplay
+    }
+    if(dom.buyStar.style.display !== dim6StyleDisplay){
+        dom.buyStar.style.display = dim6StyleDisplay
+    }
+    if(dom.stars1.style.display !== dim6StyleDisplay){
+        dom.stars1.style.display = dim6StyleDisplay
+    }
+    if(dom.stats_effectsDiv5.style.display !== dim6StyleDisplay){
+        dom.stats_effectsDiv5.style.display = dim6StyleDisplay
+    }
+    if(dom.sacrificeStuff.style.display !== dim6StyleDisplay){
+        dom.sacrificeStuff.style.display = dim6StyleDisplay
+    }
+
+    let dim7StyleDisplay
+    if(game.expanse.best>0){
+        dim7StyleDisplay = 'block'
+    }else{
+        dim7StyleDisplay = 'none'
+    }
+    if(dom.dim7.style.display !== dim7StyleDisplay){
+        dom.dim7.style.display = dim7StyleDisplay
+    }
 
     if(game.atoms.total>2){
         dom.tickspeedStuff.style.display = 'block'
@@ -294,48 +380,104 @@ function UItick() //good luck
     }
 
     if(game.atoms.total>4){
+        if(dom.buyExpanse.style.display !== 'inline-block'){
             dom.buyExpanse.style.display = 'inline-block'
+        }
+        if(dom.dimExpanse1.style.display !== 'inline'){
             dom.dimExpanse1.style.display = 'inline'
+        }
+        if(dom.dimExpanse3_5.style.display !== 'inline'){
             dom.dimExpanse3_5.style.display = 'inline'
+        }
+        if(dom.dimExpanse4.style.display !== 'inline'){
             dom.dimExpanse4.style.display = 'inline'
+        }
+        if(dom.dimExpanse5.style.display !== 'inline'){
             dom.dimExpanse5.style.display = 'inline'
+        }
+        if(dom.dimExpanse6.style.display!== 'inline'){
             dom.dimExpanse6.style.display = 'inline'
+        }
+        if(dom.stats_effectsDiv4.style.display !== 'block'){
             dom.stats_effectsDiv4.style.display = 'block'
+        }
+        if(dom.stats_effectsDiv3.style.display !== 'block'){
             dom.stats_effectsDiv3.style.display = 'block'
-        }else{
+        }
+    }else{
+        if(dom.buyExpanse.style.display !== 'none'){
             dom.buyExpanse.style.display = 'none'
+        }
+        if(dom.dimExpanse1.style.display !== 'none'){
             dom.dimExpanse1.style.display = 'none'
+        }
+        if(dom.dimExpanse3_5.style.display !== 'none'){
             dom.dimExpanse3_5.style.display = 'none'
+        }
+        if(dom.dimExpanse4.style.display !== 'none'){
             dom.dimExpanse4.style.display = 'none'
+        }
+        if(dom.dimExpanse5.style.display !== 'none'){
             dom.dimExpanse5.style.display = 'none'
+        }
+        if(dom.dimExpanse6.style.display!== 'none'){
             dom.dimExpanse6.style.display = 'none'
+        }
+        if(dom.stats_effectsDiv4.style.display !== 'none'){
             dom.stats_effectsDiv4.style.display = 'none'
+        }
+        if(dom.stats_effectsDiv3.style.display !== 'none'){
             dom.stats_effectsDiv3.style.display = 'none'
+        }
         }
     
     let enDim = game.energy_dims['energy_dim'+game.expanse.cost_type]
     if(enDim.level>game.expanse.cost-1){
         dom.buyExpanse.style.borderColor = 'green'
+        if(dom.buyExpanse.style.borderColor !== 'green'){
+            dom.buyExpanse.style.borderColor = 'green'
+        }
     }else{
         dom.buyExpanse.style.borderColor = 'red'
+        if(dom.buyExpanse.style.borderColor !== 'red'){
+            dom.buyExpanse.style.borderColor = 'red'
+        }
     }
 
     if(game.atoms.amount>game.energy_dims.tickspeed.cost){
             dom.buyTickspeed.style.borderColor = 'green'
+            if(dom.buyTickspeed.style.borderColor !== 'green'){
+                dom.buyTickspeed.style.borderColor = 'green'
+            }
         }else{
             dom.buyTickspeed.style.borderColor = 'red'
+            if(dom.buyTickspeed.style.borderColor !== 'red'){
+                dom.buyTickspeed.style.borderColor = 'red'
+            }
         }
 
         if(game.energy_dims.energy_dim7.level>game.stars.cost-1){
                 dom.buyStar.style.borderColor = 'green'
+                if(dom.buyStar.style.borderColor !== 'green'){
+                    dom.buyStar.style.borderColor = 'green'
+                }
             }else{
                 dom.buyStar.style.borderColor = 'red'
+                if(dom.buyStar.style.borderColor !== 'red'){
+                    dom.buyStar.style.borderColor = 'red'
+                }
             }
 
     if(game.collapse.bestCollapsePoints>-999){
         dom.menu5.style.display = 'block'
+        if(dom.menu5.style.display !== 'block'){
+            dom.menu5.style.display  = 'block'
+        }
     } else{
         dom.menu5.style.display = 'none'
+        if(dom.menu5.style.display !== 'none'){
+            dom.menu5.style.display  = 'none'
+        }
     }
 
     let stat4DivDisplay
@@ -358,7 +500,6 @@ function UItick() //good luck
         dom.stats_effectsDiv5.style.display = stat5DivDisplay
     }
 }
-
 function gameTick() {
     if(tickerMessage == 'oops sorry wrong direction')
         {
