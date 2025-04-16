@@ -102,45 +102,6 @@ function ach_tick()
             document.getElementById('sachImg'+i).style.backgroundSize = 100+'%'
     }
 
-    const smallDivs = document.querySelectorAll('.achievement');
-    const smallDivs2 = document.querySelectorAll('.achievement2');
-
-    smallDivs.forEach(div => {
-        const infoBox = div.querySelector('.achInfo');
-        const achTitle = div.querySelector('.achTitle');
-        const achDesc = div.querySelector('.achDesc');
-        
-        div.addEventListener('mouseenter', () => {
-            achTitle.textContent = achNames[div.getAttribute('order')]
-            achDesc.textContent = achInfos[div.getAttribute('order')]
-            infoBox.style.display = 'block';
-        });
-
-        div.addEventListener('mouseleave', () => {
-            infoBox.style.display = 'none';
-        });
-    });
-
-    smallDivs2.forEach(div => {
-        const infoBox = div.querySelector('.achInfo');
-        const achTitle = div.querySelector('.achTitle');
-        const achDesc = div.querySelector('.achDesc');
-        
-        div.addEventListener('mouseenter', () => {
-            const order = parseInt(div.getAttribute('order'))
-            achTitle.textContent = secretAchNames[order]
-            if(game.sAchievements.includes(order+1)){
-                achDesc.textContent = secretAchInfos2[order]
-            }else{
-                achDesc.textContent = secretAchInfos[order]
-            }
-            infoBox.style.display = 'block';
-        });
-
-        div.addEventListener('mouseleave', () => {
-            infoBox.style.display = 'none';
-        });
-    });
 
     if(game.energy_dims.energy_dim1.level>0){
         getAch(1,true)
@@ -206,3 +167,43 @@ function ach_tick()
         }
     }
 }
+
+    const smallDivs = document.querySelectorAll('.achievement');
+    const smallDivs2 = document.querySelectorAll('.achievement2');
+
+    smallDivs.forEach(div => {
+        const infoBox = div.querySelector('.achInfo');
+        const achTitle = div.querySelector('.achTitle');
+        const achDesc = div.querySelector('.achDesc');
+        
+        div.addEventListener('mouseenter', () => {
+            achTitle.textContent = achNames[div.getAttribute('order')]
+            achDesc.textContent = achInfos[div.getAttribute('order')]
+            infoBox.style.display = 'block';
+        });
+
+        div.addEventListener('mouseleave', () => {
+            infoBox.style.display = 'none';
+        });
+    });
+
+    smallDivs2.forEach(div => {
+        const infoBox = div.querySelector('.achInfo');
+        const achTitle = div.querySelector('.achTitle');
+        const achDesc = div.querySelector('.achDesc');
+        
+        div.addEventListener('mouseenter', () => {
+            const order = parseInt(div.getAttribute('order'))
+            achTitle.textContent = secretAchNames[order]
+            if(game.sAchievements.includes(order+1)){
+                achDesc.textContent = secretAchInfos2[order]
+            }else{
+                achDesc.textContent = secretAchInfos[order]
+            }
+            infoBox.style.display = 'block';
+        });
+
+        div.addEventListener('mouseleave', () => {
+            infoBox.style.display = 'none';
+        });
+    });
