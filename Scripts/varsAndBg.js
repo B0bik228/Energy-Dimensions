@@ -412,6 +412,7 @@ const newsTickers = ['The eighth dimension is a lie',
     'FLINT AND STEEL',
     'I. AM. ... AM... who am i?',
     'I am... IMPOTENT RAAAAGE!',
+    "once upon a time, a young Lad who had an account on galaxy.cLick under the name Of 'help' Was playing energy dimensions. Then, he sAw a PerfEct newstickeR in the game about that god-awFul low tAper faDe meme (which is still massivE) and was Immediately put into the deepeSt rage a person haS, and will ever experience. he Tore through the walls of hIs house, commited multipLe counts of vehicuLar Manslaughter, And even one on an diSSabled lady. and that Is why you don't put a massiVe low taper fadE meme into your game kids. by the way, did you ever wonder why some of the letters were capitalised? well, read them in order, and you'll understand.",
     'One day, a boy named pneunomoultramicroscopicsilicovolcanoconiosis contracted pneunomoultramicroscopicsilicovolcanoconiosis and had to go to the pneunomoultramicroscopicsilicovolcanoconiosis doctor to treat his pneunomoultramicroscopicsilicovolcanoconiosis. Unfortunately, the pneunomoultramicroscopicsilicovolcanoconiosis doctor contracted pneunomoultramicroscopicsilicovolcanoconiosis himself and died.',
 ]
 
