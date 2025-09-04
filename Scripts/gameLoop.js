@@ -3301,4 +3301,56 @@ function galaxyReset(){
         game.Spacetime.universeEff = 0
         game.Spacetime.galaxies = add_logs(game.Spacetime.galaxies,game.Spacetime.galaxyGain)
     }
+
 }
+
+
+// --- Visibility catch-up (no deltas, preserves 40 TPS) ---
+let _hiddenAt = null;
+
+function _markHidden() {
+  if (_hiddenAt == null) _hiddenAt = Date.now();
+}
+
+function _catchUpNow() {
+  if (_hiddenAt == null) return;
+
+  const elapsed = Date.now() - _hiddenAt;
+  _hiddenAt = null;
+  if (elapsed < 50) return; // ignore tiny blips
+
+  const msPerTick = 25; // 40 ticks/s
+  const a = elapsed / msPerTick;
+
+  // Reuse your offline model & cap, just like load-time offline calc
+  let ticks;
+  const prevOffline = offline_speed;
+  if (a < game.settings.offlineTicks) {
+    ticks = Math.floor(a);
+    offline_speed = 0;
+  } else {
+    ticks = game.settings.offlineTicks;
+    offline_speed = Math.log10(Math.floor(a) / game.settings.offlineTicks);
+  }
+
+  // Run in chunks so the UI doesn’t freeze
+  const BATCH = 2000;
+  while (ticks > 0) {
+    const n = Math.min(BATCH, ticks);
+    for (let i = 0; i < n; i++) gameTick();
+    ticks -= n;
+  }
+
+  offline_speed = prevOffline;
+
+  // Bring the UI up-to-date immediately
+  try { UItick(); } catch {}
+}
+
+// Hidden/visible inside an iframe, tab switches, etc.
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') _markHidden();
+  else _catchUpNow();
+});
+window.addEventListener('blur', _markHidden);
+window.addEventListener('focus', _catchUpNow);
