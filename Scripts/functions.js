@@ -568,11 +568,6 @@ function start_offline_progress(a) {
         setInterval(gameTick, 25)
 });
 
-// Start the loop
-requestAnimationFrame(mainLoop);
-    }, 100);
-}
-
 function changeSubMenu(a){
     game.subMenu = a
     if(game.menu == 3 && game.subMenu == 1)
@@ -1078,5 +1073,6 @@ window.onload = function() {
     }, 500);
 
 };
+
 
 
