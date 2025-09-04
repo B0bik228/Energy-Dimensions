@@ -565,7 +565,27 @@ function start_offline_progress(a) {
         document.getElementById('popupClose').textContent = 'Play'
         offline_skipped = true
         if(ticks>99999 &&! game.sAchievements.includes(3)){getAch(3,false)}
-        setInterval(gameTick,25)
+
+        const TICK_RATE = 40;
+        const TICK_INTERVAL = 1000 / TICK_RATE; // thanks chatGPT
+        let lastFrame = performance.now();
+        let tickAccumulator = 0;
+        
+        function mainLoop(now) {
+            const elapsed = now - lastFrame;
+            lastFrame = now;
+            tickAccumulator += elapsed;
+    
+        while (tickAccumulator >= TICK_INTERVAL) {
+            gameTick();
+            tickAccumulator -= TICK_INTERVAL;
+        }
+    
+        requestAnimationFrame(mainLoop);
+}
+
+// Start the loop
+requestAnimationFrame(mainLoop);
     }, 100);
 }
 
@@ -1072,4 +1092,5 @@ window.onload = function() {
             if(game.Automation['autoOn'+i]){document.getElementById('auto_thingCheck'+i).checked = true}
         }
     }, 500);
+
 };
