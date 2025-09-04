@@ -565,8 +565,9 @@ function start_offline_progress(a) {
         document.getElementById('popupClose').textContent = 'Play'
         offline_skipped = true
         if(ticks>99999 &&! game.sAchievements.includes(3)){getAch(3,false)}
-        setInterval(gameTick, 25)
-});
+        setInterval(gameTick, 25);
+    });
+};
 
 function changeSubMenu(a){
     game.subMenu = a
@@ -1073,3 +1074,4 @@ window.onload = function() {
     }, 500);
 
 };
+
