@@ -1073,6 +1073,3 @@ window.onload = function() {
     }, 500);
 
 };
-
-
-
