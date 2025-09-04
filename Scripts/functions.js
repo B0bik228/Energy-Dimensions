@@ -566,7 +566,7 @@ function start_offline_progress(a) {
         offline_skipped = true
         if(ticks>99999 &&! game.sAchievements.includes(3)){getAch(3,false)}
         setInterval(gameTick, 25)
-}
+});
 
 // Start the loop
 requestAnimationFrame(mainLoop);
@@ -1078,4 +1078,5 @@ window.onload = function() {
     }, 500);
 
 };
+
 
