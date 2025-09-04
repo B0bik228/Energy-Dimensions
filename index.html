@@ -1,0 +1,555 @@
+<html>
+    <head><title>Energy Dimensions</title></head>
+    <link rel="stylesheet" href="styles.css">
+    <body class="body" style="font-family: 'Courier New', Courier, monospace; background-color: rgb(0, 39, 39);">
+        <div id="newsticker" class="newsticker" style="overflow-x: hidden;"><div onclick="newstickerEvent()" id="tickerMessage" style="position: relative; width: max-content; font-size: 1.2vw;"></div></div>
+        <div class="popupBg" id="popupBg">
+            <div class="popup" id="popup">
+                <div class="popupTitle"><font id="popupTitle">Uh oh!</font></div> <br>
+                <div style="height: 20%;"><font id="popupInfo" style="font-size: 1.4vw;">you are not supposed to be here.</font> <br>
+                <font id="popupInfo2" style="font-size: 1.4vw;">you are not supposed to be here.</font></div> <br>
+                <div class="popupCloseDiv"> <div onclick="closePopup(1)" class="closePopup effect" id="popupClose">better run!</div><div onclick="closePopup(2)" class="closePopup2 effect" id="popupClose2">better run!</div> </div>
+            </div>
+        </div>
+        <div id="achGotDiv" class="achGotDiv"></div>
+            <button id="goSupernovaButton" onclick="supernova()" class="goSupernova effect"><font id="stardustGain0.1" style="font-weight: bold; font-size: 2.7vh;">SUPERNOVA</font><font id="stardustGain0.2" style="font-size: 1.35vh;">Go supernova and reset everything up to this point, gaining stardust (SD) in return.</font><font id="stardustGain1" style="font-size: 2vh; font-weight: bold;">+3 stardust</font><font id="stardustGain2" style="font-size: 2vh;" class="smalltext">Next at 1.0e700 atoms</font></button>
+
+            <div id="atoms_menu" class="content_menu">
+                <center><font style="font-size: 1.2vw; color: grey; margin-top: 0.5vh;" id="youAreCurrentlyIn"></font><br>
+                <div id="atoms" style="color: white;"><font class="smalltext" style="font-size: 1.4vw;">You have </font><font class="bigtext" id="atoms2" style="font-size: 1.9vw;"></font><font class="smalltext" style="font-size: 1.4vw;"> atoms.</font><br>
+                <font class="smalltext" style="font-size: 1vw;">You are making </font><font class="smalltext" id="atoms_s2" style="font-size: 1vw;"></font><font class="smalltext" style="font-size: 1vw;"> every second.</font></div> <br>
+                <div id="energy" style="color: yellow;"><font class="smalltext" style="font-size: 0.9vw;">Your dimensions produced </font><font class="bigtext" id="energy2" style="font-size: 1.3vw;"></font><font class="smalltext" style="font-size: 0.9vw;"> energy. (+</font><font class="bigtext" id="energy4" style="font-size: 1.3vw;"></font><font class="smalltext" style="font-size: 0.9vw;">/s)</font></div>
+                <div id="energy_eff" style="color: yellow;"><font class="smalltext" style="font-size: 0.9vw;">Energy raised by </font><font class="bigtext" id="energy_eff2" style="font-size: 1.3vw;"></font><font class="smalltext" style="font-size: 0.9vw;"> generates </font><font class="bigtext" id="energy_eff4" style="font-size: 1.3vw;"></font><font class="smalltext" style="font-size: 0.9vw;"> atoms per second.</font></div>
+                <div id="energySoftcapInfoDiv" style="color: yellow; margin-bottom: 4px;"> <font class="smalltext" style="font-size: 1vw;" id="energySoftcapInfo1"></font> <font class="bigtext" style="font-size: 1.3vw;" id="energySoftcapInfo2"></font></div> </center>
+                <center><button onclick="atomMenu(1)" id="atomSubmenu1" class="atom_submenu effect">Production</button><button onclick="atomMenu(2)" id="atomSubmenu2" class="atom_submenu2 effect">Exploration</button></center>
+                <div class="dimension-stuff">
+                    <div class="dimensions" id="atomMenu1">
+                        <div id="buy10-sacrifice_eff" style="color: white; display: inline-block;font-size: 1.2vw;"><font class="smalltext" id="buy10-sacrifice"></font></div> <button onclick="change_buy_mode()" class="ED_buyStuff effect" id="ED_buy_mode" style="font-size: 0.8vw;"></button> <button onclick="ED_buy_all()" class="ED_buyStuff2 effect" id="ED_buy_mode2" style="font-size: 0.8vw;">Buy all</button>
+                        <div id="dim1" class="dimensionBg" style="margin-top: 1vh;"><font id="energy_dim1" style="color: rgb(255, 255, 117); font-size: 0.9vw;"></font><font id="energy_dim1.1" style="color: rgb(255, 255, 117); margin-left: 12%; font-size: 1vw;"></font><button onclick="buyDim(1)" class="buyDim effect" id="buyDim1"><font id="buyDimCost1" style="color: white; font-size: 0.9vw;"></font></button></div>
+                        <div id="dim2" class="dimensionNoBg"><font id="energy_dim2" style="color: rgb(255, 255, 117); font-size: 0.9vw;"></font><font id="energy_dim2.1" style="color: rgb(255, 255, 117); margin-left: 12%; font-size: 1vw;"></font><button onclick="buyDim(2)" class="buyDim effect" id="buyDim2"><font id="buyDimCost2" style="color: white; font-size: 0.9vw;"></font></button></div>
+                        <div id="dim3" class="dimensionBg"><font id="energy_dim3" style="color: rgb(255, 255, 117); font-size: 0.9vw;"></font><font id="energy_dim3.1" style="color: rgb(255, 255, 117); margin-left: 12%; font-size: 1vw;"></font><button onclick="buyDim(3)" class="buyDim effect" id="buyDim3"><font id="buyDimCost3" style="color: white; font-size: 0.9vw;"></font></button></div>
+                        <div id="dim4" class="dimensionNoBg"><font id="energy_dim4" style="color: rgb(255, 255, 117); font-size: 0.9vw;"></font><font id="energy_dim4.1" style="color: rgb(255, 255, 117); margin-left: 12%; font-size: 1vw;"></font><button onclick="buyDim(4)" class="buyDim effect" id="buyDim4"><font id="buyDimCost4" style="color: white; font-size: 0.9vw;"></font></button></div>
+                        <div id="dim5" class="dimensionBg"><font id="energy_dim5" style="color: rgb(255, 255, 117); font-size: 0.9vw;"></font><font id="energy_dim5.1" style="color: rgb(255, 255, 117); margin-left: 12%; font-size: 1vw;"></font><button onclick="buyDim(5)" class="buyDim effect" id="buyDim5"><font id="buyDimCost5" style="color: white; font-size: 0.9vw;"></font></button></div>
+                        <div id="dim6" class="dimensionNoBg"><font id="energy_dim6" style="color: rgb(255, 255, 117); font-size: 0.9vw;"></font><font id="energy_dim6.1" style="color: rgb(255, 255, 117); margin-left: 12%; font-size: 1vw;"></font><button onclick="buyDim(6)" class="buyDim effect" id="buyDim6"><font id="buyDimCost6" style="color: white; font-size: 0.9vw;"></font></button></div>
+                        <div id="dim7" class="dimensionBg"><font id="energy_dim7" style="color: rgb(255, 255, 117); font-size: 0.9vw;"></font><font id="energy_dim7.1" style="color: rgb(255, 255, 117); margin-left: 12%; font-size: 1vw;"></font><button onclick="buyDim(7)" class="buyDim effect" id="buyDim7"><font id="buyDimCost7" style="color: white; font-size: 0.9vw;"></font></button></div> <br>
+                        <div id="tickspeed-stuff" class="dimensionBg" style="margin-top: 2%;"><font id="tickspeed1" style="color: white; font-size: 1vw;"></font><font id="tickspeed2" style="color: rgb(255, 255, 117); margin-left: 12%; font-size: 1vw;"></font><button onclick="buyTickspeed()" class="buyDim effect" id="buyTickspeed"><font id="tickspeed3" style="color: white;font-size: 1vw;"></font></button></div>
+                        <div id="sacrifice-stuff" class="sacrifice-stuff"> <button onclick="buySacrifice()" id="buySacrifice" class="sacrifice effect" style="font-family: 'Courier New', Courier, monospace;"><font id="sacrifice1" style="color: white; font-size: 0.9vw;"></font><font id="sacrifice2" style="color: white; font-weight: bold; font-size: 1vw;"></font></button> </div>
+                    </div>
+                    <div class="dimensions2" id="atomMenu2">
+                        <font id="dimExpanse1" style="color: cyan; font-weight: bold; font-size: 1.1vw;"></font> <br>
+                        <button onclick="buyExpanse()" id="buyExpanse" class="dimexpanse effect"><font id="dimExpanse2" style="color: cyan; font-size: 1.1vw;"></font> <br><br> <font id="dimExpanse3" style="color: cyan; font-weight: bold; font-size: 1.3vw;"></font></button> <br>
+                        <font id="dimExpanse3.5" style="font-weight: bold; color: cyan; font-size: 1.4vw;">EXPANSE BONUSES:</font> <br>
+                        <font id="dimExpanse4" style="color: cyan; font-size: 0.9vw;"></font> <br>
+                        <font id="dimExpanse5" style="color: cyan; font-size: 0.9vw;"></font> <br>
+                        <font id="dimExpanse6" style="color: cyan; font-size: 0.9vw;"></font> <br> <br>
+                        <font id="stars1" style="color: rgb(255, 255, 150); font-weight: bold; font-size: 1.1vw;"></font>
+                        <button id="buyStar" onclick="buyStar()" class="star effect"><font style="color: rgb(255, 255, 150); font-size: 1.1vw;">Reset all progress to improve the energy exponent.</font> <br><br> <font id="stars3" style="color: rgb(255, 255, 150); font-weight: bold; font-size: 1.3vw;"></font></button> <br>
+                    </div>
+                    <div id="atomMenu3" style="display: none; width: 100%; align-items: center;">
+                        <div id="exploMenu1" style="width: 30%; height: 95%; background-color: black; border-style: solid; border-color: white; border-width: 0.4vw; border-left: none; overflow-y: auto;">
+                            <div id="inventoryItem1" style="border-color: white;" class="inventoryItem"><div><img src="images/items/item1Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText1.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText1.2">+^3 to 1st ED production</span> <br> <span id="invText1.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem2" style="border-color: white;" class="inventoryItem"><div><img src="images/items/item2Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText2.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText2.2">+^3 to 1st ED production</span> <br> <span id="invText2.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem3" style="border-color: white;" class="inventoryItem"><div><img src="images/items/item3Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText3.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText3.2">+^3 to 1st ED production</span> <br> <span id="invText3.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem4" style="border-color: white;" class="inventoryItem"><div><img src="images/items/item4Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText4.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText4.2">+^3 to 1st ED production</span> <br> <span id="invText4.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem5" style="border-color: white;" class="inventoryItem"><div><img src="images/items/item5Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText5.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText5.2">+^3 to 1st ED production</span> <br> <span id="invText5.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem6" style="border-color: white;" class="inventoryItem"><div><img src="images/items/item6Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText6.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText6.2">+^3 to 1st ED production</span> <br> <span id="invText6.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem7" style="border-color: white;" class="inventoryItem"><div><img src="images/items/item7Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText7.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText7.2">+^3 to 1st ED production</span> <br> <span id="invText7.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem8" style="border-color: white;" class="inventoryItem"><div><img src="images/items/item8Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText8.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText8.2">+^3 to 1st ED production</span> <br> <span id="invText8.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem9" style="border-color: white;" class="inventoryItem"><div><img src="images/items/item9Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText9.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText9.2">+^3 to 1st ED production</span> <br> <span id="invText9.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem10" style="border-color: lime; color: lime;" class="inventoryItem"><div><img src="images/items/item10Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText10.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText10.2">+^3 to 1st ED production</span> <br> <span id="invText10.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem11" style="border-color: lime; color: lime;" class="inventoryItem"><div><img src="images/items/item11Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText11.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText11.2">+^3 to 1st ED production</span> <br> <span id="invText11.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem12" style="border-color: lime; color: lime;" class="inventoryItem"><div><img src="images/items/item12Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText12.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText12.2">+^3 to 1st ED production</span> <br> <span id="invText12.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem13" style="border-color: lime; color: lime;" class="inventoryItem"><div><img src="images/items/item13Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText13.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText13.2">+^3 to 1st ED production</span> <br> <span id="invText13.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem14" style="border-color: lime; color: lime;" class="inventoryItem"><div><img src="images/items/item14Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText14.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText14.2">+^3 to 1st ED production</span> <br> <span id="invText14.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem15" style="border-color: lime; color: lime;" class="inventoryItem"><div><img src="images/items/item15Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText15.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText15.2">+^3 to 1st ED production</span> <br> <span id="invText15.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem16" style="border-color: blue; color: cyan;" class="inventoryItem"><div><img src="images/items/item16Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText16.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText16.2">+^3 to 1st ED production</span> <br> <span id="invText16.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem17" style="border-color: blue; color: cyan;" class="inventoryItem"><div><img src="images/items/item17Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText17.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText17.2">+^3 to 1st ED production</span> <br> <span id="invText17.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem18" style="border-color: blue; color: cyan;" class="inventoryItem"><div><img src="images/items/item18Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText18.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText18.2">+^3 to 1st ED production</span> <br> <span id="invText18.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem19" style="border-color: blue; color: cyan;" class="inventoryItem"><div><img src="images/items/item19Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText19.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText19.2">+^3 to 1st ED production</span> <br> <span id="invText19.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem20" style="border-color: blue; color: cyan;" class="inventoryItem"><div><img src="images/items/item20Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText20.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText20.2">+^3 to 1st ED production</span> <br> <span id="invText20.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem21" style="border-color: blueviolet; color: rgb(162, 93, 227);" class="inventoryItem"><div><img src="images/items/item21Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText21.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText21.2">+^3 to 1st ED production</span> <br> <span id="invText21.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem22" style="border-color: blueviolet; color: rgb(162, 93, 227);" class="inventoryItem"><div><img src="images/items/item22Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText22.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText22.2">+^3 to 1st ED production</span> <br> <span id="invText22.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem23" style="border-color: blueviolet; color: rgb(162, 93, 227);" class="inventoryItem"><div><img src="images/items/item23Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText23.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText23.2">+^3 to 1st ED production</span> <br> <span id="invText23.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem24" style="border-color: blueviolet; color: rgb(162, 93, 227);" class="inventoryItem"><div><img src="images/items/item24Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText24.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText24.2">+^3 to 1st ED production</span> <br> <span id="invText24.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem25" style="border-color: yellow; color: yellow;" class="inventoryItem"><div><img src="images/items/item25Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText25.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText25.2">+^3 to 1st ED production</span> <br> <span id="invText25.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem26" style="border-color: yellow; color: yellow;" class="inventoryItem"><div><img src="images/items/item26Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText26.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText26.2">+^3 to 1st ED production</span> <br> <span id="invText26.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem27" style="border-color: red; color: red;" class="inventoryItem"><div><img src="images/items/item27Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText27.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText27.2">+^3 to 1st ED production</span> <br> <span id="invText27.3">Total: ^31</span> </div> </div>
+                            <div id="inventoryItem28" style="border-color: red; color: red;" class="inventoryItem"><div><img src="images/items/item28Icon.png" style="height: 90%;margin-right: 10%;"></div> <div> <span id="invText28.1" style="font-weight: bold; font-size: 1.15vw;">Location (10/50)</span> <br> <span id="invText28.2">+^3 to 1st ED production</span> <br> <span id="invText28.3">Total: ^31</span> </div> </div>
+                        </div>
+                        <div style="width: 40%; height: 95%; text-align: center; color: white;">
+                            <div style="display: flex; justify-content: space-around; align-items: center;"> <button id="changeArea1" onclick="changeArea(-1)" class="changeArea effect"><-</button><div style="text-align: center;"><font id="explorationArea" style="font-size: 1.8vw; font-weight: bolder;">helo</font><br><font id="explorationArea2" class="smalltext" style="font-size: 1vw; font-weight: bold;">helo</font></div><button id="changeArea2" onclick="changeArea(1)" class="changeArea effect">-></button> </div> <br>
+                            <div class="collectionProgress1"><div id="collectionProgressBar" class="collectionProgress2" style="width: 30%;"></div><font class="textWithOutline" id="collectionProgress" style="font-weight: bold; position: absolute; text-align: center; color: white; grid-area: 1/1; place-self: center;">hello, fellow traveler!</font></div><br>
+                            <font style="font-size: 4vh; font-weight: bolder;">AREA ITEMS</font><br>
+                            <a id="areaItem1" class="areaItem1">Point</a><br>
+                            <a id="areaItem2" class="areaItem1">Line</a><br>
+                            <a id="areaItem3" class="areaItem2">Cube</a><br>
+                            <a id="areaItem4" class="areaItem2">Tesseract</a><br>
+                            <a id="areaItem5" class="areaItem3">Quantum string</a><br>
+                            <a id="areaItem6" class="areaItem4">Cosmic ball</a><br>
+                            <a id="areaItem7" class="areaItem5">A cat...?</a><br>
+                            <a id="areaItem8" class="areaItem6">THE BALL OF AGONY AND DESPAIR</a><br>
+                        </div>
+                        <div style="width: 30%; height: 95%;">
+                            <center><span style="color: white;font-size: 1.2vw; font-weight: bold;" id="expLevelText">Exploration level 77 (56.62%)</span><br>
+                            <div class="collectionProgress1"><div id="expLevelBar" class="collectionProgress2" style="width: 30%; background-color: rgb(6, 92, 172);"></div><font class="textWithOutline" id="expLevelProgress" style="font-weight: bold; position: absolute; text-align: center; color: white; grid-area: 1/1; place-self: center; font-size: 1vw;">hello, fellow traveler!</font></div>
+                            <span style="color: white; font-size: 0.85vw;" id="expLevelBoostText">x1.4^77 exploration speed</span><br>
+                            <div style="overflow-y: auto; height: 80%;">
+                            <button onclick="expUpgrade(1)" class="explorationLevelUpgrade effect" style="border-color: rgb(255, 255, 255);"><span style="font-weight: bold; font-size: 1.2vw;">Atom accelerator</span><br><span style="font-size: 1vw;" id="expLevelUpgText1.1">x1 -> x1.15 collection speed</span><br><span style="font-size: 1vw; font-weight: bold;" id="expLevelUpgText1.2">1.0e999,999 atoms</span></button>
+                            <button onclick="expUpgrade(2)" class="explorationLevelUpgrade effect" style="border-color: rgb(255, 255, 116);"><span style="font-weight: bold; font-size: 1.2vw;">Energy accelerator</span><br><span style="font-size: 1vw;" id="expLevelUpgText2.1">x1 -> x1.15 collection speed</span><br><span style="font-size: 1vw; font-weight: bold;" id="expLevelUpgText2.2">1.0e999,999 energy</span></button>
+                            <button onclick="expUpgrade(3)" class="explorationLevelUpgrade effect" style="border-color: rgb(255, 184, 61);"><span style="font-weight: bold; font-size: 1.2vw;">Light accelerator</span><br><span style="font-size: 1vw;" id="expLevelUpgText3.1">x1 -> x1.15 collection speed</span><br><span style="font-size: 1vw; font-weight: bold;" id="expLevelUpgText3.2">1.0e999,999 stars</span></button>
+                            <button id="explorationUpgrade4" onclick="expUpgrade(4)" class="explorationLevelUpgrade effect" style="border-color: rgb(211, 136, 255);"><span style="font-weight: bold; font-size: 1.2vw;">Sacrificial accelerator</span><br><span style="font-size: 1vw;" id="expLevelUpgText4.1">x1 -> x1.15 collection speed</span><br><span style="font-size: 1vw; font-weight: bold;" id="expLevelUpgText4.2">1.0e999,999 sacrifice mult</span></button>
+                            <button id="explorationUpgrade5" onclick="expUpgrade(5)" class="explorationLevelUpgrade effect" style="border-color: rgb(242, 94, 255); margin-bottom: 5%;"><span style="font-weight: bold; font-size: 1.2vw;">Stardust accelerator</span><br><span style="font-size: 1vw;" id="expLevelUpgText5.1">x1 -> x1.15 collection speed</span><br><span style="font-size: 1vw; font-weight: bold;" id="expLevelUpgText5.2">1.0e999,999 stardust</span></button></div></center>
+                        </div>
+                    </div>
+                </div>
+                <div class="progressBar"><div id="progressBar2" class="progressBar2"></div> <font class="textWithOutline" id="progressBar" style="font-size: 1vw; font-weight: bold; color: white; grid-area: 1/1; place-self: center;"></font></div>
+            </div>
+
+            <div id="ach_menu" class="content_menu">
+                <center> <font style="font-size: 3vw; font-weight: bold; color: white;">ACHIEVEMENTS</font> <br>
+                <font style="font-size: 1vw; color: white; opacity: 0.6;" id="ach_boost"></font> <br>
+                <div id="achDiv" class="achDiv">
+                    <div id="achImg1" class="achievement" order=0><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg2" class="achievement" order=1><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg3" class="achievement" order=2><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg4" class="achievement" order=3><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg5" class="achievement" order=4><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg6" class="achievement" order=5><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg7" class="achievement" order=6><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg8" class="achievement" order=7><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg9" class="achievement" order=8><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg10" class="achievement" order=9><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg11" class="achievement" order=10><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg12" class="achievement" order=11><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg13" class="achievement" order=12><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg14" class="achievement" order=13><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg15" class="achievement" order=14><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg16" class="achievement" order=15><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg17" class="achievement" order=16><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg18" class="achievement" order=17><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg19" class="achievement" order=18><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg20" class="achievement" order=19><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg21" class="achievement" order=20><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg22" class="achievement" order=21><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg23" class="achievement" order=22><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg24" class="achievement" order=23><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg25" class="achievement" order=24><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg26" class="achievement" order=25><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg27" class="achievement" order=26><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg28" class="achievement" order=27><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg29" class="achievement" order=28><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg30" class="achievement" order=29><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg31" class="achievement" order=30><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg32" class="achievement" order=31><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg33" class="achievement" order=32><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg34" class="achievement" order=33><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg35" class="achievement" order=34><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg36" class="achievement" order=35><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg37" class="achievement" order=36><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg38" class="achievement" order=37><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg39" class="achievement" order=38><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg40" class="achievement" order=39><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg41" class="achievement" order=40><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg42" class="achievement" order=41><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg43" class="achievement" order=42><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg44" class="achievement" order=43><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg45" class="achievement" order=44><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg46" class="achievement" order=45><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg47" class="achievement" order=46><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg48" class="achievement" order=47><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg49" class="achievement" order=48><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg50" class="achievement" order=49><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg51" class="achievement" order=50><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg52" class="achievement" order=51><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg53" class="achievement" order=52><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg54" class="achievement" order=53><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="achImg55" class="achievement" order=54><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                </div>
+                <div id="sachDiv" class="achDiv">
+                    <div onclick="getAch(1,false)" id="sachImg1" class="achievement2" order=0><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div onclick="sAch2Click()" id="sachImg2" class="achievement2" order=1><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg3" class="achievement2" order=2><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg4" class="achievement2" order=3><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg5" class="achievement2" order=4><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg6" class="achievement2" order=5><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg7" class="achievement2" order=6><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg8" class="achievement2" order=7><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg9" class="achievement2" order=8><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg10" class="achievement2" order=9><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg11" class="achievement2" order=10><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                    <div id="sachImg12" class="achievement2" order=11><div id="achInfo1" class="achInfo"><span class="achTitle"></span><span class="achDesc"></span></div></div>
+                </div></center>
+            </div>
+
+            <div id="stats_menu" class="content_menu">
+                <br>
+                <center> <div id="stats_menu1">
+                    <font style="color: rgb(0, 204, 255); font-size: 2.5vw; font-weight: bold;">GENERAL</font> <br>
+                    <font id="stats1" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats1.1" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats2" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats3" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats4" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats5" style="font-size: 1.1vw; color: white;"></font>
+                    <font id="stats5.5" style="font-size: 1.1vw; color: white;"></font> <br><br>
+                    <font id="stats6" style="font-size: 1.1vw; color: white;"></font> <br><br>
+                    <font id="stats7.0" style="color: rgb(157, 0, 177); font-size: 2.5vw; font-weight: bold;">SUPERNOVA</font> <br>
+                    <font id="stats7" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats7.5" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats8" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats9" style="font-size: 1.1vw; color: white;"></font> <br>
+                    <font id="stats10" style="font-size: 1.1vw; color: white;"></font> <br><br>
+                    <a style="font-size: 1.4vw;" class="gameLink" href="https://b0bik228.github.io/Energy-Dimensions/" target="_blank" rel="noopener noreferrer">Github version</a><a style="font-size: 1.4vw;" class="gameLink" href="https://www.youtube.com/@mamkagod228" target="_blank" rel="noopener noreferrer">Youtube channel</a>
+                </div>
+                <div id="stats_menu2" class="stats_menu2">
+                    <font style="font-size: 3vw; font-weight: bold; color: white;">PAST SUPERNOVAS</font><br>
+                    <span id="record0" style="font-size: 1.5vw;">---</span><br>
+                    <span id="record1" style="font-size: 1.5vw;">---</span><br>
+                    <span id="record2" style="font-size: 1.5vw;">---</span><br>
+                    <span id="record3" style="font-size: 1.5vw;">---</span><br>
+                    <span id="record4" style="font-size: 1.5vw;">---</span><br>
+                    <span id="record5" style="font-size: 1.5vw;">---</span><br>
+                    <span id="record6" style="font-size: 1.5vw;">---</span><br>
+                    <span id="record7" style="font-size: 1.5vw;">---</span><br>
+                    <span id="record8" style="font-size: 1.5vw;">---</span><br>
+                    <span id="record9" style="font-size: 1.5vw;">---</span><br>
+                </div></center>
+            </div>
+            <div id="options_menu" class="content_menu">
+                <center><font style="font-size: 2.3vw; font-weight: bolder; color: white; border-style: solid; border-color: white; border-width: 3px; border-left: none; border-right: none; border-top: none;">--- VISUAL / UI ---</font> <br><br>
+                <div style="display: flex; width: 100%; height: 12%; justify-content: center; align-items: center;"> <div class="option"> <font id="UIoption1" style="color: white; font-size: 1.3vw;"></font><br><input type="range" id="UIrateSlider" min="25" max="500" value="25" style="width: 100%;"> </div>   <div class="option"> <font style="color: white; font-size: 1.3vw;">Background effects:</font><br><input type="checkbox" id="bgEffCheckbox" checked> </div> 
+                <div class="option"><font style="color: white; font-size: 1.3vw;" id="UIoption2"></font><br><input type="range" id="newsSpeedSlider" min="50" max="200" value="100" style="width: 100%;"></div> <div class="option"><font style="color: white; font-size: 1.3vw;" id="UIoption3"></font><br><input type="range" id="precisionSlider" min="1" max="4" value="2" style="width: 100%;"></div> </div> <br>
+                <div style="display: flex; width: 100%; height: 12%; justify-content: center; align-items: center;"> <div class="topBarOption option"> <font style="font-size: 1.3vw; color: white;">Top bar</font><br><a onclick="change_topBar(1)">News</a><a onclick="change_topBar(2)">Percentage</a><a onclick="change_topBar(3)">Currencies</a><br><a onclick="change_topBar(4)">Title</a><a onclick="change_topBar(5)">Nothing</a><a onclick="change_topBar(6)">OFF</a> </div>
+                <div class="topBarOption option" style="padding-right: none; border-right: none;">  <font id="options_notation" style="font-size: 1.3vw; color: white;">Notation</font><br><a onclick="change_notation(0)">Mixed scientific</a><a onclick="change_notation(1)">Scientific</a><a onclick="change_notation(2)">Engineering</a><a onclick="change_notation(3)">Logarithm</a><a onclick="change_notation(4)">Letters</a><br><a onclick="change_notation(5)">Log2()</a><a onclick="change_notation(6)">Double logarithm</a><a onclick="change_notation(7)">Infinity</a><a onclick="change_notation(8)">Blind</a> </div> </div>
+                
+                <br><font style="font-size: 2.3vw; font-weight: bolder; color: white; border-style: solid; border-color: white; border-width: 3px; border-left: none; border-right: none; border-top: none;">--- SAVES ---</font> <br><br>
+                <div style="display: flex; width: 100%; height: 12%; justify-content: center; align-items: center;"> <button onclick="saveGame()" class="optionBtn effect"><font>Save game</font></button> <button onclick="exportGame()" class="optionBtn effect"><font>Export save</font></button>
+                <button onclick="importGame()" class="optionBtn effect"><font>Import save</font></button> <button onclick="hardReset()" class="optionBtn effect" style="border-color: red; margin-right: 0; border-width: 0.5vw;"><font>Hard reset</font></button> </div>
+
+                <br><font style="font-size: 2.3vw; font-weight: bolder; color: white; border-style: solid; border-color: white; border-width: 3px; border-left: none; border-right: none; border-top: none;">--- GAMEPLAY ---</font> <br><br>
+                <div style="display: flex; width: 100%; height: 12%; justify-content: center; align-items: center;"> <div class="option effect" style="border-right: none;"><font style="color: white; font-size: 1.3vw;" id="UIoption4"></font><br><input type="range" id="offlineTicksSlider" min="1000" max="100000" value="10000" style="width: 100%;"> </div> <div class="option"> <font id="UIoption5" style="color: white; font-size: 1.3vw;"></font><br><input type="checkbox" id="supernovaConfCheckbox" checked> </div></div>    </center>
+            </div>
+                <div id="supernova_menu" class="content_menu">
+                    <center> <div id="atoms.1" style="color: white;"><font class="smalltext" style="font-size: 1.4vw;">You have </font><font class="bigtext" id="atoms2.1" style="font-size: 1.9vw;"></font><font class="smalltext" style="font-size: 1.4vw;"> atoms.</font><br>
+                    <font class="smalltext" style="color: rgb(215, 93, 255); font-size: 1vw;">You have </font><font class="bigtext" id="stardust2" style="color: rgb(215, 93, 255); font-size: 1.4vw;"></font><font class="smalltext" style="color: rgb(215, 93, 255); font-size: 1vw;"> stardust.</font></div><br>
+                    <div class="supernovaBgEff"></div>
+                    <button onclick="forceSupernova()" class="forceSupernova effect">Force a supernova (no confirmation!)</button></center>
+
+                    <div class="supernovaStuff" id="supernovaStuff">
+                        <div class="supernovaUpgrades1">
+                            <center> <a style="font-weight: bolder; font-size: 2vw; color: white;">Boosts</a><br>
+                            <div class="supernovaUpgrade effect" order=0><font style="font-size: 0.9vw;">Boost ED 1,2 & 3 by supernovas.</font><br><font id="superUpgEff1" style="font-size: 0.8vw;"></font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">1 stardust</font></div>
+                            <div class="supernovaUpgrade effect" order=1><font style="font-size: 0.9vw;">Boost ED 4,5 & 6 by supernovas.</font><br><font id="superUpgEff2" style="font-size: 0.8vw;"></font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">1 stardust</font></div>
+                            <div class="supernovaUpgrade effect" order=2><font style="font-size: 0.9vw;">Boost ED 7 by supernovas.</font><br><font id="superUpgEff3" style="font-size: 0.8vw;"></font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">1 stardust</font></div>
+                            <div class="supernovaUpgrade effect" order=3><font style="font-size: 0.9vw;">Improve dimensional expanses by 50%.</font><br><font style="font-size: 0.8vw;">+50% power</font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">1 stardust</font></div><br>
+                            <div class="supernovaUpgrade effect" order=4><font style="font-size: 0.9vw;">Increase the energy exponent by +0.1.</font><br><font style="font-size: 0.8vw;">+0.1 energy exp.</font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">3 stardust</font></div>
+                            <div class="supernovaUpgrade effect" order=5><font style="font-size: 0.9vw;">x10 the caps & x3 the power of all common items.</font><br><font style="font-size: 0.8vw;">x10 cap & x3 power</font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">7 stardust</font></div>
+                            <div class="supernovaUpgrade effect" order=6><font style="font-size: 0.9vw;">Decrease post-SN ED scaling from x10 to x7.</font><br><font style="font-size: 0.8vw;">x10 -> x7 scaling</font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">12 stardust</font></div>
+                            <div id="superUpgradeBlock1">
+                                <div class="supernovaUpgrade effect" order=7><font style="font-size: 0.8vw;">Timelines are stronger based on time spent in this supernova</font><br><font id="superUpgEff8" style="font-size: 0.8vw;"></font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">26 stardust</font></div>
+                                <div class="supernovaUpgrade effect" order=8><font style="font-size: 0.9vw;">Sacrifice slightly boosts SD.</font><br><font id="superUpgEff9" style="font-size: 0.8vw;"></font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">35 stardust</font></div>
+                                <div class="supernovaUpgrade effect" order=9><font style="font-size: 0.85vw;">x1.25 tim. speed for each supernova upgrade bought.</font><br><font id="superUpgEff10" style="font-size: 0.8vw;"></font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">200 stardust</font></div>
+                                <div class="supernovaUpgrade effect" order=10><font style="font-size: 0.9vw;">x4 collecting speed & Dim. expanse's cost scales slower</font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">1.6K stardust</font></div>
+                            </div>
+                            <div id="superUpgradeBlock2">
+                                <div class="supernovaUpgrade effect" order=11><font style="font-size: 0.8vw;">Triple the cap for all uncommon & rare items. Also improves 'Photon'.</font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">2.0M stardust</font></div>
+                                <div class="supernovaUpgrade effect" order=12><font style="font-size: 0.9vw;">Timelines will now synergise each other.</font><br><font id="superUpgEff13" style="font-size: 0.8vw;"></font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">100B stardust</font></div>
+                                <div class="supernovaUpgrade effect" order=13><font style="font-size: 0.9vw;">Time spent in a condense reset boosts universe speed.</font><br><font id="superUpgEff14" style="font-size: 0.8vw;"></font><br><font class="supernovaUpgradePrice" style="font-weight: bold; font-size: 0.9vw;">1.0Sp stardust</font></div></center>
+                        </div>
+                        <div class="supernovaUpgrades2">
+                            <center> <a style="font-weight: bolder; font-size: 2vw; color: white;">Quality of life</a><br>
+                            <div class="supernovaQOLUpgrade effect" order=0><font style="font-size: 0.9vw;">Start supernovas with 2 dim. expanses.</font><br><font style="font-weight: bold; font-size: 0.9vw;">8 stardust</font></div>
+                            <div class="supernovaQOLUpgrade effect" order=1><font style="font-size: 0.9vw;">Start supernovas with 2 more dim. expanse.</font><br><font style="font-weight: bold; font-size: 0.9vw;">24 stardust</font></div>
+                            <div class="supernovaQOLUpgrade effect" order=2><font style="font-size: 0.9vw;">Start star resets with 2 dim. expanses.</font><br><font style="font-weight: bold; font-size: 0.9vw;">100 stardust</font></div><br>
+                            <div class="supernovaQOLUpgrade effect" order=3><font style="font-size: 0.9vw;">Start supernovas with 1 star.</font><br><font style="font-weight: bold; font-size: 0.9vw;">900 stardust</font></div>
+                            <div id="QoLBlock1">
+                                <div class="supernovaQOLUpgrade effect" order=4><font style="font-size: 0.9vw;">Unlock more automation + a new mode.</font><br><font style="font-weight: bold; font-size: 0.9vw;">100K stardust</font></div>
+                                <div class="supernovaQOLUpgrade effect" order=5><font style="font-size: 0.9vw;">Start star resets with +2 dim. expanses.</font><br><font style="font-weight: bold; font-size: 0.9vw;">2.0B stardust</font></div>
+                                <div class="supernovaQOLUpgrade effect" order=6><font style="font-size: 0.9vw;">You keep your sacrifice bonus on star resets.</font><br><font style="font-weight: bold; font-size: 0.9vw;">150Qa stardust</font></div>
+                                <div class="supernovaQOLUpgrade effect" order=7><font style="font-size: 0.9vw;">Expanses no longer reset anything.</font><br><font style="font-weight: bold; font-size: 0.9vw;">10QiDc stardust</font></div>
+                                <div class="supernovaQOLUpgrade effect" order=8><font style="font-size: 0.9vw;">Automation is no longer disabled in quadrants.</font><br><font style="font-weight: bold; font-size: 0.9vw;">10SpDc stardust</font></div>
+                            </div>
+                        </div> </center>
+                    </div><br>
+                    <div class="supernovaStuff2" id="supernovaStuff2">
+                        <center> <div class="supernovaUpgrades3">
+                            <a style="font-weight: bolder; font-size: 2vw; color: white;">Unlocks/Progression</a><br>
+                            <div class="supernovaUnlockUpgrade effect" order=0><font style="font-size: 1.1vw;">Time to relax - Unlock Automation.</font><br><font style="font-weight: bold; font-size: 1.1vw;">1 total stardust</font></div>
+                            <div class="supernovaUnlockUpgrade effect" order=1><font style="font-size: 1.1vw;">Start the flow of time - Unlock Timelines.</font><br><font style="font-weight: bold; font-size: 1.1vw;">4 total stardust</font></div>
+                            <div class="supernovaUnlockUpgrade effect" order=2><font style="font-size: 1.1vw;">Spice it up - Unlock Quadrants.</font><br><font style="font-weight: bold; font-size: 1.1vw;">30.0K total stardust</font></div>
+                            <div class="supernovaUnlockUpgrade effect" order=3><font style="font-size: 1.1vw;">Expand outwards - Unlock Spacetime & Areas beyond 'Edge of the Stable Lands'.</font><br><font style="font-weight: bold; font-size: 1.1vw;">10Qi total stardust</font></div>
+                        </div> </center>
+                    </div>
+
+                    <div class="quadrantStuff" id="quadrantStuff">
+                        <div class="quadrantBg">
+                            <span style="color: white; filter: opacity(0.5); font-size: 0.8vw;">By default, automation does not work, the energy exponent is decreased by -0.25, you start with 0 stars/expanses/etc. while in quadrants.</span>
+                            <div class="quadrantRow">
+                                
+                            </div>
+                            <div class="quadrantRow">
+                                <div id="quadrant2" onclick="openQuadrant(2)" class="quadrant effect">2-1</div>
+                            </div>
+                            <div class="quadrantRow">
+                                <div id="quadrant3" onclick="openQuadrant(3)" class="quadrant effect">2-2</div>
+                                <div id="quadrant1" onclick="openQuadrant(1)" class="quadrant effect">1-1</div>
+                                <div id="quadrant5" onclick="openQuadrant(5)" class="quadrant effect">2-4</div>
+                            </div>
+                            <div class="quadrantRow">
+                                <div id="quadrant4" onclick="openQuadrant(4)" class="quadrant effect">2-3</div>
+                            </div>
+                            <div class="quadrantRow">
+                            </div>
+                        </div>
+                        <div class="quadrantInfo">
+                            <center> <button id="enterQuadrant" onclick="enterQuadrant()" class="enterQuadrant effect"><font id="enterQuadrantText"></font></button><br>
+                            <font id="quadrantTierName" style="font-size: 2vw; color: white; font-weight: bold;"></font><br>
+                            <font id="quadrantName" style="font-size: 1.4vw; color: white;">Click on a box to the left to start!</font><br>
+                            <font id="quadrantState" style="font-size: 1vw; color: rgb(156, 156, 156);"></font><br>
+                            <span id="quadrantBuffsText" style="color: lime; font-weight: bold; font-size: 1.7vw; display: none;">PROS:</span><br>
+                            <div class="quadrantBuffs" id="quadrantBuffs">
+                                <font id="quadrantBuff1" style="display: block; font-size: 1vw; color: rgb(104, 255, 104);"></font>
+                                <font id="quadrantBuff2" style="display: block; font-size: 1vw; color: rgb(104, 255, 104);"></font>
+                                <font id="quadrantBuff3" style="display: block; font-size: 1vw; color: rgb(104, 255, 104);"></font>
+                            </div><br>
+                            <span id="quadrantDebuffsText" style="color: red; font-weight: bold; font-size: 1.7vw; display: none;">CONS:</span><br>
+                            <div class="quadrantDebuffs" id="quadrantDebuffs">
+                                <font id="quadrantDebuff1" style="display: block; font-size: 1vw; color: rgb(255, 104, 104);"></font>
+                                <font id="quadrantDebuff2" style="display: block; font-size: 1vw; color: rgb(255, 104, 104);"></font>
+                                <font id="quadrantDebuff3" style="display: block; font-size: 1vw; color: rgb(255, 104, 104);"></font>
+                            </div><br>
+                            <span id="quadrantRewardText" style="color: white; font-weight: bold; font-size: 2.4vh; display: none;">Quadrant's boost:</span><br>
+                            <span id="quadrantReward" style="color: white; font-size: 1.9vh; display: none;"></span><br></center>
+                        </div>
+                    </div>
+
+                    <div class="spacetimeStuff" id="spacetimeStuff">
+                        <center> <div style="width: 100%; height: 15%;"><font class="smalltext" id="universeSize1" style="font-size: 1.3vw;">The universe is </font><font class="bigtext" id="universeSize2" style="font-size: 1.7vw; color: cyan;"></font><font class="smalltext" id="universeSize2.1" style="font-size: 1.3vw;"> km^3 big.</font><br><font class="smalltext" id="universeSize3" style="font-size: 1.3vw;"> It's size boosts tickspeed's base by </font><font class="bigtext" id="universeSize4" style="font-size: 1.7vw;"></font><br>
+                        <font class="smalltext" id="universeSize5"></font></div><br>
+                        <div style="width: 100%; height: 25%;">
+                            <button onclick="buySpacetimeUpg(1)" id="universeUpg1" class="universeUpg effect"><font style="font-size: 1.2vw;">Boost base universe growth speed.</font> <br> <font style="font-size:0.9vw;" id="universeUpg1.2"></font> <br> <font style="font-size: 1.2vw; font-weight: bold;" id="universeUpg1.3"></font></button>
+                            <button onclick="buySpacetimeUpg(2)" id="universeUpg2" class="universeUpg effect"><font style="font-size: 1.2vw;">Increase the universe size's limit.</font> <br> <font style="font-size:0.9vw;" id="universeUpg2.2"></font> <br> <font style="font-size: 1.2vw; font-weight: bold;" id="universeUpg2.3"></font></button>
+                            <button onclick="buySpacetimeUpg(3)" id="universeUpg3" class="universeUpg effect"><font style="font-size: 1.2vw;">Boost the universe's effect. Resets uni size.</font> <br> <font style="font-size:0.9vw;" id="universeUpg3.2"></font> <br> <font style="font-size: 1.2vw; font-weight: bold;" id="universeUpg3.3"></font></button>
+                        </div><br>
+                        <div style="width: 100%; height: 10%;"><font class="smalltext" id="galaxies1" style="font-size: 1.3vw;">You have </font><font class="bigtext" id="galaxies2" style="font-size: 1.7vw; color: blueviolet;"></font><font class="smalltext" id="galaxies3" style="font-size: 1.3vw;"> galaxies.</font><br><font class="smalltext" id="universeSize3" style="font-size: 1.3vw;"> They speed up the universe's growth by ^</font><font class="bigtext" id="galaxies4" style="font-size: 1.7vw;"></font></div><br>
+                        <button onclick="galaxyReset()" class="galaxyReset effect"><font style="font-size: 1.7vw; font-weight: bold;">CONDENSATION</font><br><font style="font-size: 1vw;">Reset your universe's size to gain galaxies.</font><br><font style="font-size: 1.4vw; font-weight: bold;" id="galaxies5"></font></button><br>
+                        <div style="width: 100%; height: 25%;">
+                            <button onclick="buySpacetimeUpg(4)" id="universeUpg4" class="galaxyUpg effect"><font style="font-size: 1.2vw;">Increase stardust gain after the softcap.</font> <br> <font style="font-size:0.9vw;" id="galaxyUpg1.2"></font> <br> <font style="font-size: 1.2vw; font-weight: bold;" id="galaxyUpg1.3"></font></button>
+                            <button onclick="buySpacetimeUpg(5)" id="universeUpg5" class="galaxyUpg effect"><font style="font-size: 1.2vw;">Boost timeline speed.</font> <br> <font style="font-size:0.9vw;" id="galaxyUpg2.2"></font> <br> <font style="font-size: 1.2vw; font-weight: bold;" id="galaxyUpg2.3"></font></button>
+                            <button onclick="buySpacetimeUpg(6)" id="universeUpg6" class="galaxyUpg effect"><font id="galaxyUpg3.1" style="font-size: 1.2vw;"></font> <br> <font style="font-size:0.9vw;" id="galaxyUpg3.2"></font> <br> <font style="font-size: 1.2vw; font-weight: bold;" id="galaxyUpg3.3"></font></button>
+                        </div></center>
+                    </div>
+                </div>
+
+                <div id="time_menu" class="content_menu">
+                    <center> <div id="atoms.1" style="color: white;"><font class="smalltext" style="font-size: 1.4vw;">You have </font><font class="bigtext" id="atoms2.2" style="font-size: 1.9vw;"></font><font class="smalltext" style="font-size: 1.4vw;"> atoms.</font></div>
+                    <div id="stardust" style="color: rgb(215, 93, 255);"><font class="smalltext" style="font-size: 1vw;">You have </font><font class="bigtext" id="stardust2.1" style="font-size: 1.4vw;"></font><font class="smalltext" style="font-size: 1vw;"> stardust.</font></div><br>
+                    <div class="timeStuff">
+                        <div class="timelineDiv">
+                            <button onclick="changeTimelineGen(1)" id="timelineGenerateBtn1" class="timelineGenerateBtn effect"></button>
+                            <font style="font-size: 2.4vw; font-weight: bolder; color: cyan;">FUNDAMENTAL TIME</font><br>
+                            <font id="timeline1" style="font-size: 1.7vw; font-weight: bold; color: white;"></font><br><br>
+                            <font id="timeline1.1" style="font-size: 1.4vw; color: white;"></font><br><br>
+                            <font id="timeline1.2" style="font-size: 1.4vw; color: white;"></font><br><br>
+                            <font id="timeline1.3" style="font-size: 1.4vw; color: white;"></font><br>
+                            <font id="timeline1.4" style="font-size: 1vw; color: rgb(133, 133, 133);"></font><br><br>
+                            <button onclick="changeTimelineState(1)" id="timelineLock1" class="timelineLock effect">Inactive</button><br><br>
+                            <button onclick="buyTimelineUpg(1)" style="background-color: rgb(0, 0, 66); border-color: rgb(0, 166, 255);" class="timelineUpg effect">
+                                <span id="timelineUpgText1.1" style="font-size: 1vw;"></span> <br> <span id="timelineUpgText1.2" style="font-weight: bold;"></span> <br> <span id="timelineUpgText1.3"></span>
+                            </button>
+                        </div>
+                        <div class="timelineDiv">
+                            <button onclick="changeTimelineGen(2)" id="timelineGenerateBtn2" class="timelineGenerateBtn effect"></button>
+                            <font style="font-size: 2.4vw; font-weight: bolder; color: yellow;">ENERGETIC TIME</font><br>
+                            <font id="timeline2" style="font-size: 1.7vw; font-weight: bold; color: white;"></font><br><br>
+                            <font id="timeline2.1" style="font-size: 1.4vw; color: white;"></font><br><br>
+                            <font id="timeline2.2" style="font-size: 1.4vw; color: white;"></font><br><br>
+                            <font id="timeline2.3" style="font-size: 1.4vw; color: white;"></font><br>
+                            <font id="timeline2.4" style="font-size: 1vw; color: rgb(133, 133, 133);"></font><br><br>
+                            <button onclick="changeTimelineState(2)" id="timelineLock2" class="timelineLock effect">Inactive</button><br><br>
+                            <button onclick="buyTimelineUpg(2)" style="background-color: rgb(48, 46, 0); border-color: rrgb(255, 247, 0)" class="timelineUpg effect">
+                                <span id="timelineUpgText2.1" style="font-size: 1vw;"></span> <br> <span id="timelineUpgText2.2" style="font-weight: bold;"></span> <br> <span id="timelineUpgText2.3"></span>
+                            </button>
+                        </div>
+                        <div class="timelineDiv">
+                            <button onclick="changeTimelineGen(3)" id="timelineGenerateBtn3" class="timelineGenerateBtn effect"></button>
+                            <font style="font-size: 2.4vw; font-weight: bolder; color: rgb(255, 73, 252);">SUPERNOVAE TIME</font><br>
+                            <font id="timeline3" style="font-size: 1.7vw; font-weight: bold; color: white;"></font><br><br>
+                            <font id="timeline3.1" style="font-size: 1.4vw; color: white;"></font><br><br>
+                            <font id="timeline3.2" style="font-size: 1.4vw; color: white;"></font><br><br>
+                            <font id="timeline3.4" style="font-size: 1.4vw; color: white;"></font><br><br><br>
+                            <button onclick="changeTimelineState(3)" id="timelineLock3" class="timelineLock effect">Inactive</button><br><br>
+                            <button onclick="buyTimelineUpg(3)" style="background-color: rgb(47, 0, 59); border-color: rgb(149, 0, 255);" class="timelineUpg effect">
+                                <span id="timelineUpgText3.1" style="font-size: 1vw;"></span> <br> <span id="timelineUpgText3.2" style="font-weight: bold;"></span> <br> <span id="timelineUpgText3.3"></span>
+                            </button>
+                        </div>
+                    </div><br>
+                    <font class="smalltext" style="color: lime; font-size: 1.5vw; display: inline;">Timelines progress </font><font id="timelineInfo" style="color: lime; font-size: 1.8vw; display: inline; font-weight: bold;"></font><font id="timelineInfo2" class="smalltext" style="color: lime; font-size: 1.5vw; display: inline;"> faster than real time.</font></center>
+                </div>
+
+                <div id="automation_menu" class="content_menu" style="overflow-y: auto;">
+                    <div class="automation_block">
+                        <center> <a style="font-size: 2vw; font-weight: bold; color: white;">- Tier 1 -</a><br>
+                            <div onclick="autoChangeAll(true)" class="automationOption effect" style="color: lime; border-color: lime;">Turn all ON</div><div onclick="autoChangeAll(false)" class="automationOption effect" style="color: red; border-color: red;">Turn all OFF</div><br>
+                        <div class="auto_thing">
+                            <a style="font-size: 1.2vw; font-weight: bold;">1st ED Autobuyer</a><br>
+                            <button onclick="upgradeAutomation(1)" class="auto_thingButton effect" id="auto_thingButton1"></button><br>
+                            <button onclick="changeAutoMode(1)" class="auto_thingButton effect" id="auto_thingButton1.1"></button><br>
+                            <font id="auto_thing1" style="font-size: 1.1vw;"></font><br><br>
+                            <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck1" style="width: 10%; height: 10%;">
+                        </div>
+                        <div class="auto_thing">
+                            <a style="font-size: 1.2vw; font-weight: bold;">2nd ED Autobuyer</a><br>
+                            <button onclick="upgradeAutomation(2)" class="auto_thingButton effect" id="auto_thingButton2"></button><br>
+                            <button onclick="changeAutoMode(2)" class="auto_thingButton effect" id="auto_thingButton2.1"></button><br>
+                            <font id="auto_thing2" style="font-size: 1.1vw;"></font><br><br>
+                            <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck2" style="width: 10%; height: 10%;">
+                        </div>
+                        <div class="auto_thing">
+                            <a style="font-size: 1.2vw; font-weight: bold;">3rd ED Autobuyer</a><br>
+                            <button onclick="upgradeAutomation(3)" class="auto_thingButton effect" id="auto_thingButton3"></button><br>
+                            <button onclick="changeAutoMode(3)" class="auto_thingButton effect" id="auto_thingButton3.1"></button><br>
+                            <font id="auto_thing3" style="font-size: 1.1vw;"></font><br><br>
+                            <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck3" style="width: 10%; height: 10%;">
+                        </div>
+
+                        <div class="auto_thing">
+                            <a style="font-size: 1.2vw; font-weight: bold;">4th ED Autobuyer</a><br>
+                            <button onclick="upgradeAutomation(4)" class="auto_thingButton effect" id="auto_thingButton4"></button><br>
+                            <button onclick="changeAutoMode(4)" class="auto_thingButton effect" id="auto_thingButton4.1"></button><br>
+                            <font id="auto_thing4" style="font-size: 1.1vw;"></font><br><br>
+                            <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck4" style="width: 10%; height: 10%;">
+                        </div>
+                        <div class="auto_thing">
+                            <a style="font-size: 1.2vw; font-weight: bold;">5th ED Autobuyer</a><br>
+                            <button onclick="upgradeAutomation(5)" class="auto_thingButton effect" id="auto_thingButton5"></button><br>
+                            <button onclick="changeAutoMode(5)" class="auto_thingButton effect" id="auto_thingButton5.1"></button><br>
+                            <font id="auto_thing5" style="font-size: 1.1vw;"></font><br><br>
+                            <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck5" style="width: 10%; height: 10%;">
+                        </div>
+                        <div class="auto_thing">
+                            <a style="font-size: 1.2vw; font-weight: bold;">6th ED Autobuyer</a><br>
+                            <button onclick="upgradeAutomation(6)" class="auto_thingButton effect" id="auto_thingButton6"></button><br>
+                            <button onclick="changeAutoMode(6)" class="auto_thingButton effect" id="auto_thingButton6.1"></button><br>
+                            <font id="auto_thing6" style="font-size: 1.1vw;"></font><br><br>
+                            <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck6" style="width: 10%; height: 10%;">
+                        </div>
+                        <div class="auto_thing">
+                            <a style="font-size: 1.2vw; font-weight: bold;">7th ED Autobuyer</a><br>
+                            <button onclick="upgradeAutomation(7)" class="auto_thingButton effect" id="auto_thingButton7"></button><br>
+                            <button onclick="changeAutoMode(7)" class="auto_thingButton effect" id="auto_thingButton7.1"></button><br>
+                            <font id="auto_thing7" style="font-size: 1.1vw;"></font><br><br>
+                            <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck7" style="width: 10%; height: 10%;">
+                        </div>
+                        <div class="auto_thing">
+                            <a style="font-size: 1.2vw; font-weight: bold;">Tickspeed Autobuyer</a><br>
+                            <button onclick="upgradeAutomation(8)" class="auto_thingButton effect" id="auto_thingButton8"></button><br>
+                            <button onclick="changeAutoMode(8)" class="auto_thingButton effect" id="auto_thingButton8.1"></button><br>
+                            <font id="auto_thing8" style="font-size: 1.1vw;"></font><br><br>
+                            <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck8" style="width: 10%; height: 10%;">
+                        </div><br>
+                        <div id="automationTier2">
+                            <a style="font-size: 2vw; font-weight: bold; color: rgb(140, 255, 255);">- Tier 2 -</a><br>
+                            <div class="auto_thing" style="border-color: rgb(140, 255, 255);">
+                                <a style="font-size: 1.2vw; font-weight: bold;">Expanse Autobuyer</a><br>
+                                <button onclick="upgradeAutomation(9)" class="auto_thingButton effect" id="auto_thingButton9"></button><br>
+                                <font id="auto_thing9" style="font-size: 1.1vw;"></font><br><br>
+                                <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck9" style="width: 10%; height: 10%;">
+                            </div>
+                            <div class="auto_thing" style="border-color: rgb(140, 255, 255);">
+                                <a style="font-size: 1.2vw; font-weight: bold;">Star Autobuyer</a><br>
+                                <button onclick="upgradeAutomation(10)" class="auto_thingButton effect" id="auto_thingButton10"></button><br>
+                                <font id="auto_thing10" style="font-size: 1.1vw;"></font><br><br>
+                                <a style="font-size: 1.2vw; vertical-align: super;">Is active: </a><input type="checkbox" value='false' id="auto_thingCheck10" style="width: 10%; height: 10%;">
+                            </div>
+                        </div></center>
+                    </div>
+                </div>
+                <div id="story_menu" class="content_menu" style="overflow-y: auto;">
+                    <br><br><div class="storyBlock" id="storyBlock1">
+                        <a class="bigtext" style="font-size: 2.5vw; color: lightgray;">THE BASICS</a><br>
+                        <div style="font-size: 1vw; color: lightgray; border-bottom: lightgray; border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>You wake up in an empty world. Again. Nothing to do, nothing to see. Just, nothing. You are a human cursed with immortality, forced to watch existence slowly perish. But eons later, your brain surges with thoughts once more. "Is this really it? Am i just going to give up? No. I will try anything. Anything to prolong existence." And so, started your quest on reviving the universe. You look around. Nothing. But then, out of pure luck, or by the will of a divine being, an atom materialises near you. "Huh." - You think to yourself. "Maybe if i get a couple more atoms, i can create something else..." And you were right. After a long time waiting for 9 more atoms to appear, you finally compress them into something better - an energy dimension. The energy and heat of all those atoms concentrated in one place. In fact, it was so powerful, that it could produce energy out of thin air, which in turn caused more atoms to appear. This is going to be a long journey.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">Atoms are the main currency. Energy produces atoms (I'm not a physicist, don't take this game too seriously), more accurately, energy raised by an exponent (Which can be raised later in the game) generates atoms. Energy dimensions produce each other. The 3rd produces 2nd dims, the 2nd produces 1st dims, and the 1st produces energy. All energy dimensions work at a 2% efficiency. (1 of a dimension produces 0.02 of a resourse a second) To raise the 'tier' of a dimension, you need to buy 10 of a dimension. Raising the 'tier' of a dimension will greatly increase its price and double it's multiplier. (Or in other words, production) Tickspeed is an additional upgrade that does not require buying 10 of it to do something. It boosts the multiplier of ALL dimensions by a little bit, but that boost is actually VERY good. One more thing - Atom gain is softcapped by ^0.85 above 1.0e100, so, be mindful of that</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock2">
+                        <a class="bigtext" style="font-size: 2.5vw; color: cyan;">DIMENSIONAL EXPANSES</a><br>
+                        <div style="font-size: 1vw; color: cyan; border-bottom: cyan; border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>After a long time and billions of atoms later, you see a problem. You can only create 3 dimensions, but there should be much more... or maybe, there isn't? Maybe, this was all in vain...? No, there is so much you don't know about this universe. After some experimenting, you find a solution. You can tear apart 20 of your highest dimensions all at the same time to unlock a sort of 'portal' that leads to a higher dimension. However, this will cause an uncontrollable explosion that will reset all of your previous progress. You don't want to do it, but, sacrifices must be made.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">Dimensional expanses are a minor reset in this game. They reset your dimensions, energy and atoms for exponentially increasing boosts. Whenever you gain an expanse, a certain boost will increase in power. If the amount of dimensional expanses you will have after you get one is odd, it will increase your atom production. If it is even, it will increase the production of energy dimensions, and if it is a multiple of 5, it will increase the strength of... well... you'll get to it. All boosts are about the same effectiveness, so don't sweat about it too much! Get to the 7th energy dimension to continue with the story.</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock3">
+                        <a class="bigtext" style="font-size: 2.5vw; color: yellow;">STARS</a><br>
+                        <div style="font-size: 1vw; color: yellow; border-bottom: yellow; border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>Upon reaching the 7th spatial dimension, you get an unnerving feeling, that the 7th dimension is the highest you can reach, and that only the worthy can reach the 8th dimension. Thats fine, 7 dimensions is more that enough. But, only for some time. Your production slowly comes to a halt, you try to get more and more dimensional expanses, but the atom requirement is just too large. Perhaps, you need to try something new. You bundle up all your dimensions and compress them with all your might. This... dimension... "concoction" expands with a force you have never experienced before, and all your progress is gone once more. However, you feel something... new, as if energy as a whole became stronger. Exponentially stronger. You feel your back heating up, so you swiftly turn around to see something beautiful - a star. A huge, glowing star. You need to get more of them to continue your quest.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">After getting some 7th dimensions, you can get a star. Doing so will reset everything dimensional expanses reset, as well as resetting dim. expanses too. Stars increase the energy exponent by +0.1 a piece (can be increased), exponentially increasing your energy production (each star also boosts atoms by x4). The energy exponent is weaker when your atoms are low, but VERY powerful when your atom amount is high. Unfortunately, your energy exponent is softcapped after ^2. Get back to the 7th dimension to unlock some more story.</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock4">
+                        <a class="bigtext" style="font-size: 2.5vw; color: rgb(222, 0, 222);">SACRIFICE</a><br>
+                        <div style="font-size: 1vw; color: rgb(255, 77, 255); border-bottom: rgb(255, 77, 255); border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>As you get back to the 7th spatial dimension after getting a star, something whispers into your ear - "Sacrifice what you can, and I shall return the favor. It sees this as harmony restored, though harmony can be such a brittle thing." - "What was that?" - you ask yourself, hurryingly looking around. "Who are you?" ... Well, that was weird. However, that offer seems nice, maybe you should think about it. After some thinking, you agree to the being's demands, and all your dimensions, except the 7th, get reset to nothing. Obliterated. The essence of those dimensions scatter and gather throughout the cosmos, eventually calming down and infusing itself back into the dimensions. However, this was for a reason - the dimensions got slightly lighter, and therefore, cheaper. Now, you can create more dimensions with the same amount of atoms you had before.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">Sacrifice, well, sacrifices all your dimensions in order to cheapen all of them. You can only sacrifice when you have 10 7th dimensions, and if the bonus you would get from sacrifice is greater than /1 (or x1, does not matter here). The potential sacrifice bonus is based on the current sacrifice bonus and the amount of 1st dimensions. Sacrifice is reset on star resets, but is kept on dim. expanse resets. Sacrifice is pretty great, however, it does not affect the tickspeed cost. Bummer. Anyways, you have a long way to go, since the next thing you need to unlock is Supernova! You could see that ominous progress bar all this time, right?</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock5">
+                        <a class="bigtext" style="font-size: 2.5vw; color: rgb(166, 0, 255);">SUPERNOVA</a><br>
+                        <div style="font-size: 1vw; color: rgb(173, 101, 255); border-bottom: rgb(119, 0, 255); border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>As you get more stars, more atoms and more energy, suddenly your jaw drops. After a certain threshold, all your energy dimension's prices suddenly spike. The tickspeed started to rapidly increase in price a long time ago, but you didn't think this would get to your dimensions. Hm. You must be missing something. You look around. You look some more, and notice that one of your stars looks more red that the other stars. Your intuition tells you to pour all your atoms into the core. You hesitate. What if you just lose all your atoms? ... But you need to try. You put all your atoms inside the star. It starts to pulse violently. It becomes hotter and hotter, changes it's color from yellow to red, from red to blue, and then, boom. The star explodes violently. "What is it with this universe and exploding?" - you think to yourself as you get pulverised into nothing. You quickly regenerate and look at what arose from the ashes - some shiny, sharp stardust. You can do so much with this, even though it is just a single shard. As you pick up the shard, your mind courses with ideas. Most of them are dumb, but one sticks out - "What if i automate my energy dimensions? This could speed up my progress when i am sleeping!" And so, began the era of stardust.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">Supernova is the first major reset in the game. It resets all pre-supernova features (except achievements, of course) in return for some stardust. You need to get 1.0e616 atoms in your pocket to get the ability to gain stardust. Stardust can be spent on upgrades that boost verious aspects of the game, as well as unlocking new features. Stardust upgrades are split into 3 categories - Pure boosts, QoL (Quality of Life, a.k.a. making it easier and faster to restore progress) and Unlocks/Progression. Buying unlockables from the Unlocks/Progression menu does not require stardust, but the total amount of stardust you have ever obtained. Also, the costs of ALL EDs skyrocket after reaching 1.0e616, so progression after supernova is pretty difficult. Unlock Automation to continue.</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock5.5">
+                        <a class="bigtext" style="font-size: 2.5vw; color: rgb(255, 188, 107);">EXPLORATION</a><br>
+                        <div style="font-size: 1vw; color: rgb(255, 188, 107); border-bottom: rgb(255, 188, 107); border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>You always stayed within your comfort zone, not willing to go out into the unknown. But, one must conquer his fears to become more. And so, you venture out into places you have not seen yet. These areas are abundant with items and collectibles you can collect, each one having a certain purpose in boosting your atom production. Some benefit your dimensions, some affect atoms directly. But finding them is no easy task. Even though the cosmos may seem empty, like back then, it is riddled with useless junk that stands in the way.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">Exploration and items are automatically unlocked after your first supernova. Items are collected passively, and when the bar fills up, you get an item of a certain rarity. Getting an item will also grant you XP, which contributes to your exploration level, that can exponentially increase your collecting speed. A new dimensional expanse boost was also unlocked! It boosts collection speed, which is basically the same thing as 'exploration speed'. All items have a cap on how much you can get of one, with rarer items having a lower cap. The rarities are as follows: Gray - Common, Green - Uncommon, Blue - Rare, Purple - Epic, Yellow - Legendary, and the last one, Red, is Mythic.</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock6">
+                        <a class="bigtext" style="font-size: 2.5vw; color: rgb(199, 199, 199);">AUTOMATION</a><br>
+                        <div style="font-size: 1vw; color: rgb(199, 199, 199); border-bottom: rgb(199, 199, 199); border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>You closely inspect the shard. It shines brightly in your hand, even hurting your eyes. You smash it into smaller pieces and throw them at the cores of your dimensions, and as you do so, the dimensions consume the stardust and start to faintly glow, slowly pulsing back and forth. Your dimensions now can automatically create themselves, even doing so without using up your atoms. "Wonderful!" - you think to yourself. And that really is wonderful, even though your dimensions can only improve themselves every 5 seconds. Now, back to sleep you go. And YOU should take a break too.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">Automation is... well... automation. There isn't much to it. You can disable and enable certain autobuyers as well as change the mode they buy dimensions with. Whenever automation is enabled, you cannot buy that thing manually. You can make them buy a single dimension, buy 10 at once, or make them buy the dimensions in bulk (can be unlocked later). You currently only have access the the first tier of automation, but you will unlock another one way later into the game. Tier 1 automation does not take away any currency when activating. Unlock Timelines to continue.</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock7">
+                        <a class="bigtext" style="font-size: 2.5vw; color: lime;">TIMELINES</a><br>
+                        <div style="font-size: 1vw; color: lime; border-bottom: lime; border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>Upon getting a total of 3 stardust shards, your mind gets filled with ideas once more. "I always took time for granted... what if there are multiple time... lines? Woah, this stardust stuff is pretty wise!". You look around, everything around you is moving. Time is flowing like usual. You try to concentrate. Really concentrate. You start to feel... probabilities. Versions of this universe that you are not in. And time there is stagnant. Your body goes numb, but your mind travels to those timelines, and the presence of a soul can restore time in those other timelines. By letting your soul wander in a timeline, you can elongate that timeline and extract certain boosts and effects that can speed up your progress. However, this link is not perfect, as you can only choose to link 2 out of the 3 timelines with the original one, as well as only being able to elongate, or, generate one timeline that you have chosen at a time.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">There are 3 timelines that you can generate (or 'extend'). Generating a timeline will increase it's bonuses. with some of them being a milestone-type bonus, that only increases when the timeline reaches a certain threshold. The timelines are the following - FUNDAMENTAL, ENERGETIC and SUPERNOVAE. You can guess what they are focused on based on their effects. Additionally, at the start of a supernova you can choose to unlock 2 of the 3 timelines. The timelines you chose are reset when you go supernova, but you can click twice on the button that unlocks the timeline to 'lock' it. 'Locked' timelines will always stay unlocked. You can unlock the timeline by pressing the button again. For now, you can only generate 1 timeline at a time. All timelines are reset on Supernova. Unlock quadrants to continue.</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock8">
+                        <a class="bigtext" style="font-size: 2.5vw; color: rgb(220, 160, 255);">QUADRANTS</a><br>
+                        <div style="font-size: 1vw; color: rgb(220, 160, 255); border-bottom: rgb(220, 160, 255); border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>As you get more and more stardust, more and more atoms, you look yet again at your progress - but something feels off. You never noticed it, but the very edge of the space that your dimensions and stars occupy looks... off. Glitchy, even. You step beyond the line seperating the known and the unknown. After taking your first step, you immediately feel the weight of this part of the cosmos. You try to take a second step, but you just cannot. You have to retreat, you don't want to, but you do. you find out that this weird space is... richer. Richer in everything. Cosmic essence, atoms, energy, other cosmic stuff . If you place your dimensions there, they will be stronger that ever before. But you need to conquer that place first. And so, you step forth into the unknown.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">Quadrants are harder places of the universe, where you are affected with certain debuffs. Entering/Exiting a quadrant will perform a supernova reset with no reward. Completing a quadrant will require a certain amount of atoms. Each quadrant gives a boost once completed. Completing a quadrant will increase it's completions, meaning that you can beat a quadrant up to 4 times, with increasingly harsher conditions. Unlock Spacetime to progress.</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock9">
+                        <a class="bigtext" style="font-size: 2.5vw; color: rgb(27, 255, 213);">SPACETIME #1</a><br>
+                        <div style="font-size: 1vw; color: rgb(27, 255, 213); border-bottom: rgb(27, 255, 213); border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>Hm. You have so many dimensions, so many stars and so much territory... But it is all located within a... box. A pretty big box, actually. But, even the largest of boxes cannot hold you. Hm... What if you try to... "expand" the universe? Get more space for your dimensions? It is possible, however, it will be costly. But you don't care. You start to shatter ALOT of stardust, piece by piece, shard by shard, until eventually the amount of star powder concentrated in one area just becomes too much for the universe, and so, the universe expands to relieve the pressure. You try to shatter more stardust to continue the expansion, but the universe suddenly shakes. "What's wrong now?" - you ask yourself, and quickly find the answer in your surroundings - everything is getting farther away from you. The universe is expanding on it's own. And it is expanding fast... perhaps, too fast. After just a minute, the universe's size doubled. And then, it doubled again. And again. It kept doubling... until it just stopped. Looks like everything has a limit, even the universe. But that will not stop you, right?</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">Upon unlocking Spacetime, you are greeted with your universe, specifically it's size. When you buy the first spacetime upgrade (that costs stardust), your universe will start to expand exponentially. The universe's size boosts the base of your tickspeed, so a +100% increase will turn x1.1 into x(1.1^(1+x/100)), where x is the universe's boost in %, so it this case it will be x(1.1^2), which is x1.21, squaring the tickspeed's effect. There are also other upgrades that can increase the universe's limit and the power of the universe's influence on tickspeed. Reach the limit to continue.</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock10">
+                        <a class="bigtext" style="font-size: 2.5vw; color: rgb(27, 206, 255);">SPACETIME #2</a><br>
+                        <div style="font-size: 1vw; color: rgb(27, 206, 255); border-bottom: rgb(27, 206, 255); border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>The universe reached it's limit. What do you do now? You have alot more space for your progress, but it will run out at some point... wait, what if... these words never lead to something good... what if you condense the universe back to it's original size? The universe already got filled to the brim with cosmic energy, so it will have nowhere to escape except to... well... condense into something! You have to try it out, and so you do. You pull on the strings that hold the universe and pull inward. The universe condenses back into a 1km^3 box, and all the excess cosmic energy turns into... something beautiful, even more beautiful than your stars - a galaxy. Wow, what a beauty... ... but... you must... use it... to progress further... With tears running down your cheek, you crush the galaxy back into cosmic energy, and the pure amount of cosmic energy escaping in such a short time stretches the universe in all directions. The universe can now grow larger than before.</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">Condensing will reset your universe size in return for some galaxies. Galaxies can be used for upgrades, or for a raw boost to your universe's expansion speed. The boost is based on your CURRENT galaxies, not your total galaxies, so, be careful when spending them! Unlock the Black Hole to unlock some more story!!!</a>
+                    </div><br><br><br>
+                    <div class="storyBlock" id="storyBlock11">
+                        <a class="bigtext" style="font-size: 2.5vw; color: pink;">ENDGAME :D</a><br>
+                        <div style="font-size: 1vw; color: white; border-bottom: white; border-style: solid; border-width: 3px; padding-bottom: 10px; border-left: none; border-right: none; border-top: none;"><a>Congrats, player. You did it!</a></div><br>
+                        <a style="font-size: 1vw; color: rgb(255, 255, 255);">You have reached the endgame! Thank you very much for playing this game, and do not forget to leave a comment/review with some critisism that can help me improve this game even further! Unfortunately, there will be no more MAJOR updates for this game, as i want to divert my focus on some more serious projects, mostly on Roblox. Thank you again for playing and have a nice day!</a>
+                    </div><br><br><br>
+                </div>
+                <div class="menus">
+                    <div id="menus1" style="width: 100%; height: 60%; display: flex; justify-content: center; overflow-x: auto;">
+                        <button onclick="changeMenu(1)" class="menu1 effect"><img style="height: 100%;" src="images/atom.png"> <font style="bottom: 25%; position: relative;">Atoms</font></button>
+                        <button id="menu7" onclick="changeMenu(7)" class="menu7 effect"><img style="height: 100%;" src="images/menu7Icon.png"> <font style="bottom: 25%; position: relative;">Automation</font></button>
+                        <button id="menu5" onclick="changeMenu(5)" class="menu5 effect"><img style="height: 100%;" src="images/supernova.png"> <font style="bottom: 25%; position: relative;">Supernova</font></button>
+                        <button id="menu6" onclick="changeMenu(6)" class="menu6 effect"><img style="height: 100%;" src="images/sandwatch.png"> <font style="bottom: 25%; position: relative;">Time</font></button>
+                        <button onclick="changeMenu(2)" class="menu2 effect"><img style="height: 100%;" src="images/achievements.png"> <font style="bottom: 25%; position: relative;">Achievements</font></button>
+                        <button onclick="changeMenu(3)" class="menu3 effect"><img style="height: 100%;" src="images/stats.png"> <font style="bottom: 25%; position: relative;">Stats</font></button>
+                        <button onclick="changeMenu(4)" class="menu4 effect"><img style="height: 100%;" src="images/settings.png"> <font style="bottom: 25%; position: relative;">Settings</font></button>
+                        <button onclick="changeMenu(8)" class="menu8 effect"><img style="height: 100%;" src="images/menu8Icon.png"> <font style="bottom: 25%; position: relative;">Help/Story</font></button>
+                    </div>
+                    <div id="menus2" class="menus2">
+                        <button onclick="changeSubMenu(1)" class="menu1-1 effect" id="subMenu1.1"><font style="position: relative;" id="subMenu1"></font></button>
+                        <button onclick="changeSubMenu(2)" class="menu1-1 effect" id="subMenu2.1"><font style="position: relative;" id="subMenu2"></font></button>
+                        <button onclick="changeSubMenu(3)" class="menu1-1 effect" id="subMenu3.1"><font style="position: relative;" id="subMenu3"></font></button>
+                    </div>
+            </div>
+    </body>
+    <script src="Scripts/gameLoop.js"></script>
+    <script src="Scripts/varsAndBg.js"></script>
+    <script src="Scripts/achievements.js"></script>
+    <script src="Scripts/functions.js"></script>
+    <script src="Scripts/supernova.js"></script>
+</html>
+
+make sure all achievements work properly
