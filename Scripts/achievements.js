@@ -253,13 +253,13 @@ function ach_tick()
     if(game.atoms.amount>2000 && game.stars.amount<2){
         getAch(27,true)
     }
-    if(game.items.amounts[0]>15000 || game.items.amounts[1]>15000 || game.items.amounts[2]>15000){
+    if(game.items.totalCollections[0]>15000 || game.items.totalCollections[1]>15000 || game.items.totalCollections[2]>15000 || game.items.totalCollections[3]>15000 || game.items.totalCollections[4]>15000 || game.items.totalCollections[5]>15000){
         getAch(28,true)
     }
     if(game.Supernova.totalSupernovaPoints>3){
         getAch(29,true)
     }
-    if(game.items.amounts[0]>35000 || game.items.amounts[1]>35000 || game.items.amounts[2]>35000){
+    if(game.items.totalCollections[0]>35000 || game.items.totalCollections[1]>35000 || game.items.totalCollections[2]>35000 || game.items.totalCollections[3]>35000 || game.items.totalCollections[4]>35000 || game.items.totalCollections[5]>35000){
         getAch(30,true)
     }
     if(game.Timelines.timeline1Amount>Math.log10(2628000) || game.Timelines.timeline2Amount>Math.log10(2628000) || game.Timelines.timeline3Amount>Math.log10(2628000)){
@@ -375,4 +375,5 @@ function ach_tick()
         div.addEventListener('mouseleave', () => {
             infoBox.style.display = 'none';
         });
+
     });
