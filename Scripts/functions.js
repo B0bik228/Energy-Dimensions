@@ -1,6 +1,5 @@
 function buyDim(num)
 {
-    if(dom[`auto_thingCheck${num}`].checked){return}
     if(num==1 && !game.achievements.includes(13) && game.energy_dims.energy_dim1.amount>100 && game.energy_dims.buy_mode == 1){getAch(13,true)}
     let energyDim = game.energy_dims["energy_dim" + num]
     
@@ -1074,4 +1073,5 @@ window.onload = function() {
     }, 500);
 
 };
+
 
