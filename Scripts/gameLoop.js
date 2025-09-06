@@ -1504,7 +1504,7 @@ function UItick() //good luck
         dom.storyBlock10.style.display = storyBlock10Vis
     }
     let storyBlock11Vis = 'none'
-    if(game.atoms.total>1.0e6){storyBlock12Vis = 'block'}
+    if(game.atoms.total>120000){storyBlock11Vis = 'block'}
     if (dom.storyBlock11.style.display !== storyBlock11Vis) {
         dom.storyBlock11.style.display = storyBlock11Vis
     }
@@ -3354,3 +3354,4 @@ document.addEventListener('visibilitychange', () => {
 });
 window.addEventListener('blur', _markHidden);
 window.addEventListener('focus', _catchUpNow);
+
