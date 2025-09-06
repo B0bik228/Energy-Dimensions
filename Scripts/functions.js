@@ -35,7 +35,6 @@ function buyDim(num)
 
 function buyTickspeed()
 {
-    if(dom[`auto_thingCheck8`].checked){return}
     if(game.atoms.amount>game.energy_dims.tickspeed.cost)
     {
         game.energy_dims.tickspeed.amount ++
@@ -1073,5 +1072,6 @@ window.onload = function() {
     }, 500);
 
 };
+
 
 
