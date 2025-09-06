@@ -8,7 +8,7 @@ const supernovaPrices = [
     Math.log10(12),
     Math.log10(26),
     Math.log10(35),
-    Math.log10(200),
+    2,
     Math.log10(1600),
     Math.log10(2e6),
     11,
@@ -134,4 +134,5 @@ setInterval(() => {
         }
     });
     
+
 }, 250);
